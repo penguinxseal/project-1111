@@ -659,7 +659,7 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
 
 /* =====================================================================
    PROJECT 1111 — COUNTDOWN + COMPACT YOUTUBE SOUNDTRACK
-   Launch: 11 Nov 2026, 20:00 Bangkok / 21:00 Manila
+   Launch: 11 Nov 2026, 10:11 Bangkok / 11:11 Manila
    ===================================================================== */
 .launch-block{margin:clamp(14px,1.8vh,20px) auto 0;text-align:center;color:rgba(255,255,255,.90)}
 .countdown{display:flex;align-items:flex-start;justify-content:center;gap:clamp(7px,1vw,15px)}
