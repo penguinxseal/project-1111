@@ -1,0 +1,705 @@
+:root {
+  --white:#f8f5f0;
+  --pink:#f2a8cd;
+  --blue:#9adfff;
+  --cycle:18s;
+  --sans:"DM Sans",Arial,sans-serif;
+  --serif:"Playfair Display",Georgia,serif;
+  --script:"Italianno","Times New Roman",cursive;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:#020610}
+body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+
+.teaser{
+  position:relative;width:100%;height:100vh;height:100svh;height:100dvh;
+  overflow:hidden;isolation:isolate;background:#020610;
+}
+
+/* Existing teaser ambience */
+.opening-bg{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(circle at 18% 42%,rgba(35,142,208,.30),transparent 35%),
+    radial-gradient(circle at 84% 40%,rgba(205,66,132,.30),transparent 37%),
+    radial-gradient(circle at 50% 42%,rgba(26,34,56,.38),transparent 42%),
+    linear-gradient(112deg,#03111f 0%,#050813 46%,#1a0916 100%);
+  animation:openingScene var(--cycle) ease-in-out infinite;
+}
+.opening-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,transparent 22%,rgba(2,5,12,.09) 62%,rgba(2,5,12,.36) 100%)}
+
+/* Hero: true crossfade. The artwork itself never blurs, scales, or changes colour. */
+.hero-reveal{
+  position:absolute;inset:0;z-index:4;overflow:hidden;
+  opacity:0;
+  will-change:opacity;
+  animation:heroReveal var(--cycle) linear infinite;
+}
+.hero-image{
+  position:absolute;inset:0;
+  background:url("assets/images/hero-teaser-banner.png") center/cover no-repeat;
+}
+.center-bloom{
+  position:absolute;left:50%;top:42%;width:17vw;height:17vw;min-width:150px;min-height:150px;
+  transform:translate(-50%,-50%) scale(.72);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.22),rgba(242,168,205,.09) 34%,transparent 70%);
+  opacity:0;filter:blur(22px);animation:centerBloom var(--cycle) ease-in-out infinite;
+}
+
+/* Ambient foreground motion stays active throughout the full loop. */
+.ambient-motion{position:absolute;inset:0;z-index:9;pointer-events:none;overflow:hidden;animation:ambientPresence var(--cycle) ease-in-out infinite}
+.water-field,.clover-field,.sakura-field{position:absolute;inset:0}
+
+.droplet{position:absolute;border-radius:50%;border:1px solid rgba(174,229,255,.55);background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.82),rgba(105,207,255,.17) 30%,transparent 68%);box-shadow:inset 0 0 7px rgba(255,255,255,.12),0 0 10px rgba(75,187,242,.14);animation:dropletRise 8.5s linear infinite}
+.d1{width:10px;height:10px;left:7%;bottom:-4%;animation-delay:-1s}.d2{width:17px;height:17px;left:14%;bottom:-7%;animation-delay:-5.2s}.d3{width:7px;height:7px;left:22%;bottom:-4%;animation-delay:-2.8s}.d4{width:22px;height:22px;left:29%;bottom:-8%;animation-delay:-7s}.d5{width:8px;height:8px;left:34%;bottom:-4%;animation-delay:-4.1s}.d6{width:13px;height:13px;left:18%;bottom:-5%;animation-delay:-6.1s}.d7{width:6px;height:6px;left:10%;bottom:-3%;animation-delay:-3.3s}.d8{width:15px;height:15px;left:38%;bottom:-6%;animation-delay:-8s}.d9{width:9px;height:9px;left:25%;bottom:-4%;animation-delay:-.2s}
+
+.clover{position:absolute;left:0;color:#7fca42;text-shadow:0 0 9px rgba(124,211,73,.28);font-size:clamp(14px,1.5vw,26px);opacity:.54;animation:cloverDrift 10s ease-in-out infinite alternate}
+.c1{left:8%;top:22%;animation-delay:-2s}.c2{left:18%;top:50%;font-size:clamp(11px,1.15vw,21px);animation-delay:-7s}.c3{left:30%;top:16%;font-size:clamp(10px,1vw,18px);animation-delay:-4s}.c4{left:12%;top:71%;font-size:clamp(9px,.9vw,17px);animation-delay:-8s}.c5{left:35%;top:62%;font-size:clamp(8px,.8vw,15px);animation-delay:-5s}
+
+.petal{position:absolute;right:0;width:12px;height:7px;border-radius:75% 25% 70% 30%;background:linear-gradient(135deg,rgba(255,202,226,.94),rgba(217,108,162,.54));box-shadow:0 0 8px rgba(242,150,195,.14);animation:sakuraFall 10.5s linear infinite}
+.p1{right:7%;top:-5%;animation-delay:-1s}.p2{right:14%;top:-7%;transform:scale(.7);animation-delay:-5s}.p3{right:21%;top:-4%;transform:scale(1.2);animation-delay:-8s}.p4{right:29%;top:-6%;transform:scale(.8);animation-delay:-3s}.p5{right:37%;top:-5%;transform:scale(.65);animation-delay:-6.5s}.p6{right:11%;top:-8%;transform:scale(1.1);animation-delay:-9s}.p7{right:25%;top:-7%;transform:scale(.9);animation-delay:-2s}.p8{right:33%;top:-6%;transform:scale(.72);animation-delay:-7.5s}.p9{right:42%;top:-5%;transform:scale(.6);animation-delay:-4.5s}
+
+/* Typography */
+.sequence{opacity:0;will-change:opacity,transform}
+.top-brand{position:absolute;z-index:20;top:clamp(24px,4.7vh,46px);left:50%;display:flex;align-items:center;gap:15px;transform:translateX(-50%);white-space:nowrap;color:rgba(255,255,255,.92);font-size:clamp(8px,.68vw,12px);font-weight:600;letter-spacing:.42em;text-shadow:0 2px 12px rgba(0,0,0,.42)}
+.top-brand .heart{color:var(--pink);font-size:.9em;letter-spacing:0;filter:drop-shadow(0 0 8px rgba(242,168,205,.45))}
+
+.hero-copy{position:absolute;z-index:20;left:50%;top:71.5%;width:min(92vw,960px);transform:translate(-50%,-50%);text-align:center;text-shadow:0 4px 28px rgba(0,0,0,.88),0 1px 8px rgba(0,0,0,.76)}
+.hero-copy::before{content:"";position:absolute;z-index:-1;left:50%;top:52%;width:min(102vw,1140px);height:135%;transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(2,6,15,.58) 0%,rgba(2,6,15,.30) 42%,transparent 73%);filter:blur(15px)}
+.eyebrow{display:inline-block;margin:0 0 clamp(12px,1.5vh,18px);padding:7px 13px 6px;border-radius:999px;color:#d9f3ff;background:rgba(2,8,18,.46);box-shadow:0 0 24px rgba(0,0,0,.18);font-size:clamp(9px,.76vw,12px);font-weight:700;letter-spacing:.35em;text-shadow:0 2px 10px rgba(0,0,0,.95)}
+.hero-title{margin:0;font-weight:500}.headline-main,.headline-bloom{display:block}
+.headline-main{font-family:var(--serif);color:#fffaf5;font-size:clamp(42px,5vw,82px);line-height:.94;letter-spacing:-.052em;font-weight:500}
+.headline-bloom{margin-top:clamp(-4px,-.2vw,-1px);font-family:var(--script);color:#f0a4cf;font-size:clamp(50px,6vw,98px);line-height:.74;font-weight:400;letter-spacing:.005em}
+.identity{display:flex;justify-content:center;align-items:center;gap:clamp(20px,2.3vw,38px);margin:clamp(27px,3.5vh,40px) 0 0;color:rgba(255,255,255,.96);font-size:clamp(10px,.88vw,14px);font-weight:600;letter-spacing:.47em}.identity .pair-x{color:var(--blue);font-size:.9em;letter-spacing:0}
+.coming{margin:clamp(15px,1.9vh,21px) auto 0;display:flex;justify-content:center;align-items:center;gap:clamp(15px,1.8vw,27px);color:rgba(255,255,255,.78);font-size:clamp(7px,.61vw,10px);font-weight:600;letter-spacing:.47em}.coming .line{width:clamp(40px,4.1vw,70px);height:1px;background:linear-gradient(90deg,transparent,rgba(242,168,205,.74))}.coming .line:last-child{transform:scaleX(-1)}
+.footer{position:absolute;z-index:20;left:clamp(24px,3vw,52px);right:clamp(24px,3vw,52px);bottom:max(18px,env(safe-area-inset-bottom));display:flex;justify-content:space-between;gap:20px;color:rgba(255,255,255,.48);font-size:clamp(6px,.48vw,8px);font-weight:500;letter-spacing:.24em}
+.vignette{position:absolute;inset:0;z-index:18;pointer-events:none;background:radial-gradient(circle at 50% 45%,transparent 40%,rgba(0,0,0,.08) 70%,rgba(0,0,0,.28) 100%)}
+
+/* 18s loop: 0–2 ambient, 2–3.8 hero, 4–7 text, 7–13 hold, 13–15 exit, 15–18 reset */
+.sequence-brand{animation:seqBrand var(--cycle) ease-in-out infinite}.sequence-eyebrow{animation:seqEyebrow var(--cycle) ease-in-out infinite}.sequence-headline{animation:seqHeadline var(--cycle) cubic-bezier(.18,.8,.22,1) infinite}.sequence-bloom{animation:seqBloom var(--cycle) cubic-bezier(.18,.8,.22,1) infinite}.sequence-identity{animation:seqIdentity var(--cycle) ease-in-out infinite}.sequence-coming{animation:seqComing var(--cycle) ease-in-out infinite}.sequence-footer{animation:seqFooter var(--cycle) ease-in-out infinite}
+
+@keyframes openingScene{
+  0%,8%{opacity:1}
+  12%{opacity:.92}
+  18%{opacity:.56}
+  24%,74%{opacity:.12}
+  80%{opacity:.38}
+  87%{opacity:.80}
+  92%,100%{opacity:1}
+}
+@keyframes heroReveal{
+  0%,8%{opacity:0}
+  12%{opacity:.10}
+  16%{opacity:.32}
+  20%{opacity:.65}
+  24%,74%{opacity:1}
+  80%{opacity:.76}
+  84%{opacity:.48}
+  88%{opacity:.18}
+  92%,100%{opacity:0}
+}
+@keyframes centerBloom{0%,10%,89%,100%{opacity:0;transform:translate(-50%,-50%) scale(.72)}16%{opacity:.34;transform:translate(-50%,-50%) scale(.92)}22%{opacity:.16;transform:translate(-50%,-50%) scale(1.12)}30%,72%{opacity:.06;transform:translate(-50%,-50%) scale(1.04)}82%{opacity:0}}
+@keyframes ambientPresence{0%,10%,90%,100%{opacity:.92}18%,78%{opacity:.56}}
+
+/* Text has no blur: only opacity + tiny movement. */
+@keyframes seqBrand{0%,22%{opacity:0;transform:translateX(-50%) translateY(7px)}27%,75%{opacity:1;transform:translateX(-50%) translateY(0)}81%,100%{opacity:0;transform:translateX(-50%) translateY(-4px)}}
+@keyframes seqEyebrow{0%,25%{opacity:0;transform:translateY(12px)}30%,75%{opacity:1;transform:translateY(0)}81%,100%{opacity:0;transform:translateY(-4px)}}
+@keyframes seqHeadline{0%,29%{opacity:0;transform:translateY(16px)}34%,75%{opacity:1;transform:translateY(0)}81%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes seqBloom{0%,33%{opacity:0;transform:translateY(15px)}38%,75%{opacity:1;transform:translateY(0)}81%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes seqIdentity{0%,37%{opacity:0;transform:translateY(10px)}42%,75%{opacity:1;transform:translateY(0)}81%,100%{opacity:0;transform:translateY(-3px)}}
+@keyframes seqComing{0%,41%{opacity:0;transform:translateY(8px)}46%,75%{opacity:1;transform:translateY(0)}81%,100%{opacity:0;transform:translateY(-2px)}}
+@keyframes seqFooter{0%,44%{opacity:0}49%,75%{opacity:1}81%,100%{opacity:0}}
+
+@keyframes dropletRise{0%{transform:translate3d(0,0,0) scale(.72);opacity:0}10%{opacity:.58}50%{transform:translate3d(24px,-53vh,0) scale(1);opacity:.55}90%{opacity:.30}100%{transform:translate3d(48px,-112vh,0) scale(.82);opacity:0}}
+@keyframes cloverDrift{0%{transform:translate3d(-7px,5px,0) rotate(-12deg) scale(.9);opacity:.38}50%{opacity:.63}100%{transform:translate3d(14px,-13px,0) rotate(22deg) scale(1.05);opacity:.48}}
+@keyframes sakuraFall{0%{transform:translate3d(0,-8vh,0) rotate(0deg);opacity:0}9%{opacity:.62}48%{transform:translate3d(-48px,50vh,0) rotate(180deg);opacity:.56}90%{opacity:.38}100%{transform:translate3d(-92px,112vh,0) rotate(380deg);opacity:0}}
+
+/* Responsive layouts -------------------------------------------------- */
+
+/* Desktop / laptop landscape: keep the artwork dominant and place the
+   full copy in the darker lower-third safe area. */
+@media (min-width:1280px) and (min-height:701px){
+  .hero-image{background-size:cover;background-position:center 43%}
+  .top-brand{top:clamp(28px,4.2vh,48px)}
+  .hero-copy{top:73%;width:min(88vw,980px)}
+  .hero-copy::before{width:min(96vw,1160px);height:138%}
+  .eyebrow{margin-bottom:clamp(10px,1.25vh,16px);font-size:clamp(9px,.70vw,11px)}
+  .headline-main{font-size:clamp(54px,4.7vw,82px);line-height:.92}
+  .headline-bloom{font-size:clamp(62px,5.5vw,96px);line-height:.75}
+  .identity{margin-top:clamp(24px,3vh,36px)}
+  .coming{margin-top:clamp(13px,1.6vh,19px)}
+}
+
+/* Tablet landscape: scale the text as a unit so it never competes with the
+   mascots or drops below the visible viewport. */
+@media (min-width:761px) and (max-width:1279px) and (orientation:landscape) and (min-height:701px){
+  .hero-image{background-size:cover;background-position:center 42%}
+  .top-brand{top:clamp(22px,3.8vh,34px);font-size:clamp(8px,.82vw,10px);gap:12px}
+  .hero-copy{top:72%;width:min(88vw,820px);padding:0 18px}
+  .hero-copy::before{width:min(98vw,940px);height:142%}
+  .eyebrow{margin-bottom:10px;font-size:clamp(8px,.75vw,10px);letter-spacing:.31em}
+  .headline-main{font-size:clamp(44px,5vw,66px);line-height:.92}
+  .headline-bloom{font-size:clamp(52px,6vw,78px);line-height:.76}
+  .identity{margin-top:22px;gap:28px;font-size:clamp(9px,.85vw,12px)}
+  .coming{margin-top:12px;font-size:clamp(7px,.65vw,9px)}
+  .coming .line{width:44px}
+  .footer{font-size:6px;left:24px;right:24px}
+}
+
+/* Tablet portrait: treat the 16:9 artwork as a large cinematic panel rather
+   than cropping it like a desktop background. The copy gets a dedicated
+   lower safe area. */
+@media (min-width:761px) and (max-width:1100px) and (orientation:portrait){
+  .hero-image{
+    background-size:128% auto;
+    background-repeat:no-repeat;
+    background-position:center 13%;
+  }
+  .center-bloom{top:35%}
+  .top-brand{top:max(28px,env(safe-area-inset-top));font-size:10px;gap:13px;letter-spacing:.36em}
+  .hero-copy{top:70.5%;width:min(90vw,760px);padding:0 24px}
+  .hero-copy::before{width:100vw;height:146%}
+  .eyebrow{margin-bottom:12px;font-size:9px;letter-spacing:.31em}
+  .headline-main{font-size:clamp(48px,7.4vw,70px);line-height:.92}
+  .headline-bloom{font-size:clamp(58px,8.7vw,84px);line-height:.76}
+  .identity{margin-top:27px;gap:30px;font-size:11px;letter-spacing:.40em}
+  .coming{margin-top:14px;gap:14px;font-size:8px;letter-spacing:.38em}
+  .coming .line{width:42px}
+  .footer{left:24px;right:24px;bottom:max(16px,env(safe-area-inset-bottom));font-size:6px;letter-spacing:.17em}
+}
+
+/* Portrait phones: preserve the full visual story and reserve the lower
+   portion for typography. */
+@media (max-width:760px) and (orientation:portrait){
+  .teaser{height:100svh;height:100dvh;min-height:0}
+  .hero-image{
+    inset:0;
+    background-size:145% auto;
+    background-repeat:no-repeat;
+    background-position:center 15%;
+  }
+  .center-bloom{top:34%}
+  .top-brand{
+    top:max(22px,env(safe-area-inset-top));
+    gap:10px;
+    font-size:9px;
+    letter-spacing:.31em;
+  }
+  .hero-copy{
+    top:68%;
+    width:94vw;
+    padding:0 18px;
+  }
+  .hero-copy::before{height:145%;width:108vw;opacity:.92}
+  .eyebrow{
+    margin-bottom:12px;
+    padding:6px 10px 5px;
+    font-size:8px;
+    letter-spacing:.23em;
+  }
+  .headline-main{
+    font-size:clamp(38px,10.6vw,54px);
+    line-height:.91;
+  }
+  .headline-bloom{
+    margin-top:2px;
+    font-size:clamp(48px,13.2vw,68px);
+    line-height:.78;
+  }
+  .identity{
+    margin-top:25px;
+    gap:22px;
+    font-size:10px;
+    letter-spacing:.34em;
+  }
+  .coming{
+    margin-top:14px;
+    gap:10px;
+    font-size:7px;
+    letter-spacing:.32em;
+  }
+  .coming .line{width:28px}
+  .footer{
+    left:16px;right:16px;
+    bottom:max(12px,env(safe-area-inset-bottom));
+    font-size:6px;
+    letter-spacing:.13em;
+  }
+  .clover{opacity:.40}
+}
+
+/* Short landscape viewports (phones and compact tablets): fit the full text
+   stack above browser chrome and avoid off-screen content. */
+@media (orientation:landscape) and (max-height:700px){
+  .teaser{height:100svh;height:100dvh;min-height:0}
+  .hero-image{background-size:cover;background-position:center 42%}
+  .top-brand{
+    top:clamp(12px,3.5vh,24px);
+    font-size:clamp(7px,1.05vw,10px);
+    gap:10px;
+    letter-spacing:.32em;
+  }
+  .hero-copy{top:69%;width:min(86vw,760px)}
+  .hero-copy::before{height:150%;width:min(96vw,900px)}
+  .eyebrow{
+    margin-bottom:7px;
+    padding:4px 9px 3px;
+    font-size:clamp(6px,.85vw,9px);
+    letter-spacing:.27em;
+  }
+  .headline-main{font-size:clamp(28px,4.5vw,54px);line-height:.90}
+  .headline-bloom{margin-top:-1px;font-size:clamp(34px,5.4vw,64px);line-height:.72}
+  .identity{margin-top:clamp(13px,2.6vh,20px);gap:clamp(15px,2vw,26px);font-size:clamp(7px,.9vw,10px);letter-spacing:.34em}
+  .coming{margin-top:clamp(8px,1.5vh,12px);gap:10px;font-size:clamp(5px,.68vw,8px);letter-spacing:.33em}
+  .coming .line{width:32px}
+  .footer{left:18px;right:18px;bottom:max(7px,env(safe-area-inset-bottom));font-size:5px;letter-spacing:.13em}
+}
+
+/* Extra-short landscape Safari / in-app browser viewport. */
+@media (orientation:landscape) and (max-height:520px){
+  .top-brand{top:10px}
+  .hero-copy{top:66%}
+  .eyebrow{margin-bottom:5px}
+  .headline-main{font-size:clamp(25px,4vw,44px)}
+  .headline-bloom{font-size:clamp(30px,4.8vw,52px)}
+  .identity{margin-top:9px}
+  .coming{margin-top:5px}
+  .footer{bottom:5px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .opening-bg,.hero-reveal,.center-bloom,.ambient-motion,.droplet,.clover,.petal,.sequence{animation:none!important}
+  .hero-reveal,.sequence{opacity:1!important;transform:none!important}
+  .hero-reveal{filter:none!important}
+  .top-brand{transform:translateX(-50%)!important}
+}
+
+/* =====================================================================
+   v17 RESPONSIVE COMPOSITION FIX
+   The 16:9 artwork is no longer forced to fill every viewport.
+   Portrait and short-landscape layouts preserve the complete hero image,
+   while the typography is kept in a guaranteed safe area.
+   ===================================================================== */
+
+/* Portrait phones: full-width 16:9 hero panel, never crop the artwork. */
+@media (max-width:760px) and (orientation:portrait){
+  .hero-reveal{
+    inset:0 0 auto 0;
+    height:55dvh;
+    min-height:0;
+    overflow:visible;
+  }
+  .hero-image{
+    inset:0;
+    background-size:100% auto;
+    background-repeat:no-repeat;
+    background-position:center top;
+  }
+  .center-bloom{top:29%;}
+
+  .top-brand{
+    top:max(20px,env(safe-area-inset-top));
+    font-size:8px;
+    letter-spacing:.30em;
+  }
+
+  .hero-copy{
+    top:auto;
+    bottom:clamp(94px,12dvh,128px);
+    width:94vw;
+    transform:translateX(-50%);
+    padding:0 18px;
+  }
+  .hero-copy::before{
+    width:110vw;
+    height:138%;
+    opacity:.96;
+  }
+  .eyebrow{
+    margin-bottom:10px;
+    font-size:7.5px;
+    letter-spacing:.22em;
+    padding:5px 9px 4px;
+  }
+  .headline-main{
+    font-size:clamp(34px,9.6vw,48px);
+    line-height:.92;
+  }
+  .headline-bloom{
+    margin-top:0;
+    font-size:clamp(43px,11.8vw,61px);
+    line-height:.77;
+  }
+  .identity{
+    margin-top:21px;
+    gap:20px;
+    font-size:9px;
+  }
+  .coming{
+    margin-top:11px;
+    font-size:6.5px;
+    gap:9px;
+  }
+  .coming .line{width:25px;}
+  .footer{
+    left:14px;
+    right:14px;
+    bottom:max(10px,env(safe-area-inset-bottom));
+    font-size:5.5px;
+    letter-spacing:.11em;
+  }
+}
+
+/* Taller portrait phones can give the hero a little more visual room. */
+@media (max-width:760px) and (orientation:portrait) and (min-height:780px){
+  .hero-reveal{height:58dvh;}
+  .hero-copy{bottom:clamp(100px,11dvh,132px);}
+}
+
+/* Tablet portrait: preserve the complete artwork as a large 16:9 panel. */
+@media (min-width:761px) and (max-width:1100px) and (orientation:portrait){
+  .hero-reveal{
+    inset:0 0 auto 0;
+    height:58dvh;
+    overflow:visible;
+  }
+  .hero-image{
+    inset:0;
+    background-size:100% auto;
+    background-repeat:no-repeat;
+    background-position:center top;
+  }
+  .center-bloom{top:30%;}
+  .hero-copy{
+    top:auto;
+    bottom:clamp(92px,10dvh,138px);
+    width:min(90vw,760px);
+    transform:translateX(-50%);
+  }
+  .headline-main{font-size:clamp(46px,6.7vw,66px);}
+  .headline-bloom{font-size:clamp(56px,8vw,78px);}
+  .identity{margin-top:24px;}
+}
+
+/* Short landscape phones/tablets: show the COMPLETE 16:9 artwork with
+   letterboxing instead of cover-cropping, then keep the entire text stack
+   compact inside the viewport. */
+@media (orientation:landscape) and (max-height:700px){
+  .hero-reveal{inset:0;}
+  .hero-image{
+    inset:0;
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center center;
+  }
+  .opening-bg{
+    background:
+      radial-gradient(circle at 18% 42%,rgba(35,142,208,.30),transparent 35%),
+      radial-gradient(circle at 84% 40%,rgba(205,66,132,.30),transparent 37%),
+      linear-gradient(112deg,#03111f 0%,#050813 46%,#1a0916 100%);
+  }
+  .center-bloom{top:42%;}
+  .top-brand{
+    top:max(9px,env(safe-area-inset-top));
+    font-size:7px;
+    gap:9px;
+    letter-spacing:.30em;
+  }
+  .hero-copy{
+    top:auto;
+    bottom:clamp(34px,6dvh,54px);
+    width:min(76vw,700px);
+    transform:translateX(-50%);
+    padding:0 12px;
+  }
+  .hero-copy::before{
+    width:min(88vw,820px);
+    height:132%;
+    filter:blur(11px);
+  }
+  .eyebrow{
+    margin-bottom:4px;
+    padding:3px 8px 3px;
+    font-size:6px;
+    letter-spacing:.24em;
+  }
+  .headline-main{
+    font-size:min(7.0dvh,4.2vw);
+    line-height:.91;
+  }
+  .headline-bloom{
+    margin-top:-1px;
+    font-size:min(8.2dvh,5vw);
+    line-height:.72;
+  }
+  .identity{
+    margin-top:min(2.2dvh,12px);
+    gap:18px;
+    font-size:min(1.55dvh,8px);
+    letter-spacing:.31em;
+  }
+  .coming{
+    margin-top:min(1.4dvh,7px);
+    gap:8px;
+    font-size:min(1.15dvh,6px);
+    letter-spacing:.29em;
+  }
+  .coming .line{width:26px;}
+  .footer{
+    left:16px;
+    right:16px;
+    bottom:max(5px,env(safe-area-inset-bottom));
+    font-size:4.5px;
+    letter-spacing:.11em;
+  }
+}
+
+/* Extra-short landscape browser viewports: prioritize fitting all copy. */
+@media (orientation:landscape) and (max-height:520px){
+  .top-brand{top:max(6px,env(safe-area-inset-top));font-size:6px;}
+  .hero-copy{bottom:25px;width:min(72vw,620px);}
+  .eyebrow{font-size:5px;margin-bottom:3px;}
+  .headline-main{font-size:min(6.4dvh,3.7vw);}
+  .headline-bloom{font-size:min(7.4dvh,4.4vw);}
+  .identity{margin-top:6px;font-size:5.5px;}
+  .coming{margin-top:3px;font-size:4.5px;}
+  .footer{bottom:3px;font-size:4px;}
+}
+
+/* =====================================================================
+   v18 HYBRID RESPONSIVE COMPOSITION
+   Portrait = complete 16:9 hero + blended continuation.
+   Landscape = full-bleed hero + viewport-safe lower-third copy.
+   ===================================================================== */
+
+@keyframes openingScenePortrait{
+  0%,8%{opacity:1}
+  12%{opacity:.96}
+  18%{opacity:.82}
+  24%,74%{opacity:.62}
+  80%{opacity:.72}
+  87%{opacity:.90}
+  92%,100%{opacity:1}
+}
+
+/* ---------- PORTRAIT PHONES ---------- */
+@media (max-width:760px) and (orientation:portrait){
+  .opening-bg{animation:openingScenePortrait var(--cycle) ease-in-out infinite}
+
+  .hero-reveal{
+    inset:0 0 auto 0;
+    height:calc(56.25vw + 72px);
+    min-height:0;
+    overflow:hidden;
+  }
+  .hero-image{
+    inset:0 0 auto 0;
+    height:56.25vw;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    background-position:center top;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,rgba(0,0,0,.92) 86%,rgba(0,0,0,.55) 94%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 78%,rgba(0,0,0,.92) 86%,rgba(0,0,0,.55) 94%,transparent 100%);
+  }
+  .center-bloom{top:28vw}
+
+  .top-brand{
+    top:max(18px,env(safe-area-inset-top));
+    font-size:8px;
+    gap:9px;
+    letter-spacing:.30em;
+  }
+
+  .hero-copy{
+    top:calc(56.25vw + 54px);
+    bottom:auto;
+    width:94vw;
+    transform:translateX(-50%);
+    padding:0 16px;
+  }
+  .hero-copy::before{
+    width:108vw;
+    height:145%;
+    opacity:.84;
+    background:radial-gradient(ellipse at center,rgba(2,6,15,.48) 0%,rgba(2,6,15,.22) 48%,transparent 76%);
+  }
+  .eyebrow{
+    margin-bottom:9px;
+    padding:5px 9px 4px;
+    font-size:7.5px;
+    letter-spacing:.22em;
+  }
+  .headline-main{
+    font-size:clamp(34px,9.8vw,48px);
+    line-height:.92;
+  }
+  .headline-bloom{
+    margin-top:0;
+    font-size:clamp(42px,12vw,60px);
+    line-height:.78;
+  }
+  .identity{
+    margin-top:20px;
+    gap:20px;
+    font-size:9px;
+    letter-spacing:.34em;
+  }
+  .coming{
+    margin-top:11px;
+    gap:9px;
+    font-size:6.5px;
+    letter-spacing:.31em;
+  }
+  .coming .line{width:25px}
+  .footer{
+    left:14px;right:14px;
+    bottom:max(10px,env(safe-area-inset-bottom));
+    font-size:5.5px;
+    letter-spacing:.11em;
+  }
+}
+
+/* Taller portrait phones: only a little more breathing room, not a huge gap. */
+@media (max-width:760px) and (orientation:portrait) and (min-height:780px){
+  .hero-copy{top:calc(56.25vw + 66px)}
+}
+
+/* ---------- TABLET PORTRAIT ---------- */
+@media (min-width:761px) and (max-width:1100px) and (orientation:portrait){
+  .opening-bg{animation:openingScenePortrait var(--cycle) ease-in-out infinite}
+
+  .hero-reveal{
+    inset:0 0 auto 0;
+    height:calc(56.25vw + 105px);
+    min-height:0;
+    overflow:hidden;
+  }
+  .hero-image{
+    inset:0 0 auto 0;
+    height:56.25vw;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    background-position:center top;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 80%,rgba(0,0,0,.9) 87%,rgba(0,0,0,.48) 95%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 80%,rgba(0,0,0,.9) 87%,rgba(0,0,0,.48) 95%,transparent 100%);
+  }
+  .center-bloom{top:27vw}
+  .top-brand{top:max(25px,env(safe-area-inset-top));font-size:9px}
+
+  .hero-copy{
+    top:calc(56.25vw + 78px);
+    bottom:auto;
+    width:min(90vw,760px);
+    transform:translateX(-50%);
+    padding:0 24px;
+  }
+  .hero-copy::before{width:100vw;height:145%;opacity:.84}
+  .eyebrow{margin-bottom:10px;font-size:8.5px}
+  .headline-main{font-size:clamp(46px,7vw,68px)}
+  .headline-bloom{font-size:clamp(56px,8.3vw,82px)}
+  .identity{margin-top:25px}
+  .coming{margin-top:13px}
+}
+
+/* ---------- LANDSCAPE PHONES / TABLETS ---------- */
+@media (orientation:landscape) and (max-height:700px){
+  .hero-reveal{inset:0;height:auto;overflow:hidden}
+  .hero-image{
+    inset:0;
+    height:auto;
+    background-size:cover;
+    background-position:center 45%;
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .top-brand{
+    top:clamp(10px,2.8vh,18px);
+    font-size:clamp(6.5px,.78vw,9px);
+    gap:9px;
+  }
+  .hero-copy{
+    top:67%;
+    bottom:auto;
+    width:min(80vw,720px);
+    transform:translate(-50%,-50%);
+  }
+  .hero-copy::before{width:min(90vw,840px);height:148%;opacity:.82}
+  .eyebrow{margin-bottom:5px;padding:3px 8px 2px;font-size:clamp(5.5px,.62vw,8px)}
+  .headline-main{font-size:clamp(26px,4.1vw,48px);line-height:.90}
+  .headline-bloom{font-size:clamp(31px,4.8vw,56px);line-height:.72}
+  .identity{margin-top:clamp(9px,2vh,15px);gap:18px;font-size:clamp(6.5px,.72vw,9px)}
+  .coming{margin-top:clamp(5px,1.1vh,9px);gap:9px;font-size:clamp(5px,.56vw,7px)}
+  .coming .line{width:28px}
+  .footer{left:16px;right:16px;bottom:max(5px,env(safe-area-inset-bottom));font-size:4.5px}
+}
+
+/* Extra-short landscape browser viewport. */
+@media (orientation:landscape) and (max-height:520px){
+  .hero-copy{top:64%}
+  .headline-main{font-size:clamp(24px,3.8vw,40px)}
+  .headline-bloom{font-size:clamp(28px,4.4vw,47px)}
+  .identity{margin-top:7px}
+  .coming{margin-top:4px}
+}
+
+/* ---------- DESKTOP / LARGE LANDSCAPE ---------- */
+@media (min-width:1101px) and (orientation:landscape) and (min-height:701px){
+  .hero-reveal{inset:0;height:auto;overflow:hidden}
+  .hero-image{
+    inset:0;
+    height:auto;
+    background-size:cover;
+    background-position:center 44%;
+    -webkit-mask-image:none;
+    mask-image:none;
+  }
+  .hero-copy{top:72%;width:min(86vw,980px)}
+}
+
+/* =====================================================================
+   PROJECT 1111 — COUNTDOWN + COMPACT YOUTUBE SOUNDTRACK
+   Launch: 11 Nov 2026, 20:00 Bangkok / 21:00 Manila
+   ===================================================================== */
+.launch-block{margin:clamp(14px,1.8vh,20px) auto 0;text-align:center;color:rgba(255,255,255,.90)}
+.countdown{display:flex;align-items:flex-start;justify-content:center;gap:clamp(7px,1vw,15px)}
+.count-unit{display:grid;justify-items:center;min-width:clamp(42px,4.4vw,66px)}
+.count-unit strong{font-family:var(--serif);font-size:clamp(20px,2vw,31px);line-height:1;font-weight:500;letter-spacing:.04em;color:#fffaf5;font-variant-numeric:tabular-nums}
+.count-unit span{margin-top:6px;font-size:clamp(5px,.45vw,7px);font-weight:600;letter-spacing:.28em;color:rgba(255,255,255,.58)}
+.count-sep{margin-top:-2px;font-family:var(--serif);font-size:clamp(18px,1.8vw,28px);line-height:1;color:rgba(154,223,255,.68)}
+.launch-date{margin:9px 0 0;font-size:clamp(7px,.60vw,10px);font-weight:600;letter-spacing:.42em;color:rgba(255,255,255,.78)}
+.launch-time{margin:5px 0 0;font-size:clamp(6px,.50vw,8px);font-weight:500;letter-spacing:.22em;color:rgba(255,255,255,.52)}
+.launch-time span{padding:0 5px;color:var(--pink)}
+
+.soundtrack{position:absolute;z-index:25;right:clamp(18px,2.5vw,42px);bottom:clamp(42px,6vh,68px);width:clamp(190px,15vw,250px);text-shadow:none}
+.soundtrack-label{display:flex;align-items:center;gap:7px;margin:0 0 6px 2px;font-size:7px;font-weight:600;letter-spacing:.28em;color:rgba(255,255,255,.62)}
+.music-note{color:var(--pink);font-size:12px;line-height:1}
+.soundtrack-frame{height:70px;overflow:hidden;border:1px solid rgba(255,255,255,.15);border-radius:10px;background:rgba(2,6,15,.64);box-shadow:0 8px 28px rgba(0,0,0,.20);backdrop-filter:blur(8px)}
+.soundtrack-frame iframe{display:block;width:100%;height:100%;border:0}
+
+@media (max-width:760px) and (orientation:portrait){
+  .launch-block{margin-top:10px}
+  .countdown{gap:5px}
+  .count-unit{min-width:38px}
+  .count-unit strong{font-size:18px}
+  .count-unit span{font-size:5px;margin-top:4px}
+  .count-sep{font-size:17px}
+  .launch-date{margin-top:6px;font-size:6.5px}
+  .launch-time{margin-top:4px;font-size:5.5px}
+  .soundtrack{right:50%;bottom:38px;transform:translateX(50%);width:min(210px,58vw)}
+  .soundtrack-frame{height:58px;border-radius:8px}
+  .soundtrack-label{font-size:6px;margin-bottom:4px}
+}
+
+@media (orientation:landscape) and (max-height:700px){
+  .launch-block{margin-top:5px}
+  .count-unit{min-width:31px}
+  .count-unit strong{font-size:clamp(13px,2.4vh,18px)}
+  .count-unit span{margin-top:2px;font-size:4px}
+  .count-sep{font-size:14px}
+  .launch-date{margin-top:3px;font-size:4.5px}
+  .launch-time{margin-top:2px;font-size:4px}
+  .soundtrack{right:14px;bottom:24px;width:170px}
+  .soundtrack-frame{height:52px}
+  .soundtrack-label{font-size:5px;margin-bottom:3px}
+}
