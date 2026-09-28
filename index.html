@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#030711" />
-  <meta name="description" content="OomBam Official Fansite — Something beautiful is blooming." />
-  <title>OomBam Official Fansite — Coming Soon</title>
+  <meta name="description" content="An independent fansite created with love for OomBam. — Something beautiful is blooming." />
+  <title>OomBam Independent Fansite — Coming Soon</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&family=Italianno&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="teaser.css?v=20260928-1111-1" />
+  <link rel="stylesheet" href="teaser.css?v=20260928-1111-4" />
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png"/>
@@ -54,7 +54,7 @@
     </header>
 
     <section class="hero-copy" aria-labelledby="teaser-title">
-      <p class="eyebrow sequence sequence-eyebrow">OOMBAM OFFICIAL FANSITE</p>
+      <p class="eyebrow sequence sequence-eyebrow">An independent fansite created with love for OomBam.</p>
       <h1 id="teaser-title" class="hero-title">
         <span class="headline-main sequence sequence-headline">Something beautiful</span>
         <span class="headline-bloom sequence sequence-bloom">is blooming.</span>
@@ -77,17 +77,21 @@
       </div>
     </section>
 
-    <aside class="soundtrack sequence sequence-footer" aria-label="Teaser soundtrack">
-      <div class="soundtrack-label"><span class="music-note">♪</span><span>SOUNDTRACK</span></div>
-      <div class="soundtrack-frame">
-        <iframe
-          id="soundtrack-player"
-          src="https://www.youtube.com/embed/RHnPq3Z0A8c?playlist=CKclkO6HHrY,O4Aigpyt4Uc,RHnPq3Z0A8c&loop=1&playsinline=1&rel=0"
-          title="OomBam teaser soundtrack"
-          loading="eager"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen></iframe>
+    <aside class="soundtrack" aria-label="Teaser soundtrack">
+      <div class="music-player">
+        <div class="music-meta">
+          <span class="music-kicker">♪ SOUNDTRACK</span>
+          <span class="music-title" id="music-title">OomBam Playlist</span>
+          <span class="music-status" id="music-status">Tap play to listen</span>
+        </div>
+        <div class="music-controls" aria-label="Music controls">
+          <button class="music-btn" id="music-prev" type="button" aria-label="Previous song">‹</button>
+          <button class="music-btn music-play" id="music-toggle" type="button" aria-label="Play soundtrack">▶</button>
+          <button class="music-btn" id="music-next" type="button" aria-label="Next song">›</button>
+        </div>
+        <div class="music-progress" aria-hidden="true"><span id="music-progress-bar"></span></div>
+        <div class="music-foot"><span id="music-track">01 / 03</span><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a></div>
+        <div id="yt-player" class="yt-player" aria-hidden="true"></div>
       </div>
     </aside>
 
@@ -97,6 +101,6 @@
 
     <div class="vignette" aria-hidden="true"></div>
   </main>
-  <script src="teaser.js?v=20260928-1111-1" defer></script>
+  <script src="teaser.js?v=20260928-1111-4" defer></script>
 </body>
 </html>
