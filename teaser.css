@@ -703,3 +703,104 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   .soundtrack-frame{height:52px}
   .soundtrack-label{font-size:5px;margin-bottom:3px}
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v4 — STABLE COUNTDOWN COMPOSITION + MINIMAL MUSIC CONTROL
+   ===================================================================== */
+/* Keep all essential information continuously readable. Ambient particles
+   may move, but the hero and content no longer enter/exit on the 18s loop. */
+.hero-reveal,
+.sequence,
+.top-brand,
+.hero-copy .eyebrow,
+.hero-copy .headline-main,
+.hero-copy .headline-bloom,
+.hero-copy .identity,
+.hero-copy .launch-block,
+.footer{
+  animation:none!important;
+  opacity:1!important;
+  filter:none!important;
+}
+.hero-reveal{transform:none!important}
+.sequence{transform:none!important}
+
+/* Countdown is the visual anchor. */
+.launch-block{
+  position:relative;
+  z-index:30;
+  padding:10px 14px 9px;
+  width:max-content;
+  max-width:96vw;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+  background:linear-gradient(180deg,rgba(2,6,15,.34),rgba(2,6,15,.56));
+  box-shadow:0 10px 38px rgba(0,0,0,.18);
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+.count-unit strong{font-variant-numeric:tabular-nums lining-nums}
+
+/* Aesthetic soundtrack control. YouTube remains the playback source. */
+.soundtrack{
+  position:absolute;
+  z-index:40;
+  right:clamp(18px,2.5vw,42px);
+  bottom:clamp(42px,6vh,68px);
+  width:clamp(218px,17vw,278px);
+  text-shadow:none;
+  animation:none!important;
+  opacity:1!important;
+  transform:none!important;
+}
+.music-player{
+  position:relative;
+  overflow:hidden;
+  padding:12px 13px 10px;
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:16px;
+  background:linear-gradient(135deg,rgba(4,10,22,.78),rgba(10,8,20,.62));
+  box-shadow:0 14px 38px rgba(0,0,0,.22);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.music-player::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,rgba(154,223,255,.07),transparent 38%,rgba(242,168,205,.07));
+}
+.music-meta{position:relative;display:grid;gap:2px;padding-right:92px;min-width:0}
+.music-kicker{font-size:6px;font-weight:700;letter-spacing:.27em;color:rgba(255,255,255,.52)}
+.music-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--serif);font-size:13px;color:rgba(255,250,245,.94)}
+.music-status{font-size:6px;letter-spacing:.12em;color:rgba(255,255,255,.45)}
+.music-controls{position:absolute;z-index:2;right:10px;top:12px;display:flex;align-items:center;gap:5px}
+.music-btn{display:grid;place-items:center;width:27px;height:27px;padding:0;border:1px solid rgba(255,255,255,.13);border-radius:50%;background:rgba(255,255,255,.055);color:rgba(255,255,255,.84);font:inherit;cursor:pointer;transition:background .2s ease,border-color .2s ease,transform .2s ease}
+.music-btn:hover{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.24)}
+.music-btn:active{transform:scale(.94)}
+.music-btn:focus-visible{outline:2px solid rgba(154,223,255,.7);outline-offset:2px}
+.music-play{width:32px;height:32px;border-color:rgba(242,168,205,.30);background:rgba(242,168,205,.11);font-size:10px}
+.music-progress{position:relative;height:1px;margin:11px 0 7px;background:rgba(255,255,255,.10);overflow:hidden}
+.music-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--blue),var(--pink));transition:width .5s linear}
+.music-foot{position:relative;display:flex;justify-content:space-between;align-items:center;font-size:5px;font-weight:600;letter-spacing:.18em;color:rgba(255,255,255,.34)}
+.music-foot a{color:rgba(255,255,255,.40);text-decoration:none}
+.music-foot a:hover{color:rgba(255,255,255,.70)}
+.yt-player{position:absolute!important;width:200px!important;height:200px!important;left:-9999px!important;top:-9999px!important;overflow:hidden!important}
+
+@media (max-width:760px) and (orientation:portrait){
+  .launch-block{padding:8px 9px 7px;border-radius:12px}
+  .soundtrack{right:50%;bottom:42px;transform:translateX(50%)!important;width:min(260px,72vw)}
+  .music-player{padding:10px 11px 8px;border-radius:14px}
+  .music-meta{padding-right:86px}
+  .music-title{font-size:11px}
+  .music-controls{right:8px;top:9px}
+  .music-btn{width:25px;height:25px}
+  .music-play{width:29px;height:29px}
+}
+@media (orientation:landscape) and (max-height:700px){
+  .launch-block{padding:5px 8px 4px;border-radius:10px}
+  .soundtrack{right:12px;bottom:20px;width:205px}
+  .music-player{padding:8px 9px 7px;border-radius:12px}
+  .music-title{font-size:10px}.music-kicker,.music-status{font-size:5px}
+  .music-controls{right:7px;top:7px}.music-btn{width:23px;height:23px}.music-play{width:27px;height:27px}
+  .music-progress{margin:8px 0 5px}
+}
