@@ -1,7 +1,7 @@
 // Project 1111 teaser
-// Launch: 11 Nov 2026, 20:00 Bangkok (UTC+7) / 21:00 Manila (UTC+8)
+// Launch: 11 Nov 2026, 11:11 Manila (UTC+8) / 10:11 Bangkok (UTC+7)
 
-const LAUNCH_DATE = new Date("2026-11-11T20:00:00+07:00");
+const LAUNCH_DATE = new Date("2026-11-11T11:11:00+08:00");
 
 function pad(value) {
   return String(value).padStart(2, "0");
