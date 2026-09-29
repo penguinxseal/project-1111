@@ -925,3 +925,37 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   .count-unit span{font-size:4.5px}
   .footer{font-size:5px;color:rgba(255,255,255,.68)}
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v6 — DAILY REVEAL
+   ===================================================================== */
+.daily-reveal{
+  position:absolute;z-index:36;left:clamp(24px,3.2vw,52px);bottom:clamp(52px,7vh,82px);
+  width:clamp(220px,18vw,290px);padding:14px 16px 13px;text-align:center;
+  border:1px solid rgba(255,255,255,.13);border-radius:16px;
+  background:linear-gradient(145deg,rgba(3,10,23,.72),rgba(19,8,23,.60));
+  box-shadow:0 14px 38px rgba(0,0,0,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:#fffaf5;text-shadow:0 2px 10px rgba(0,0,0,.7);
+}
+.daily-reveal::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,rgba(154,223,255,.07),transparent 42%,rgba(242,168,205,.08))}
+.daily-ornament{position:relative;color:var(--pink);font-size:10px;margin-bottom:4px}
+.daily-day{position:relative;margin:0;font:700 7px/1 var(--sans);letter-spacing:.30em;color:rgba(255,255,255,.72)}
+.daily-label{position:relative;margin:7px 0 0;font:700 6px/1.2 var(--sans);letter-spacing:.25em;color:rgba(154,223,255,.82)}
+.daily-title{position:relative;margin:8px auto 5px;max-width:240px;font:500 clamp(14px,1.18vw,19px)/1.25 var(--serif);color:#fffaf5}
+.daily-symbol{position:relative;margin:4px 0 7px;font-size:14px;filter:drop-shadow(0 0 8px rgba(242,168,205,.3))}
+.daily-next{position:relative;margin:0;padding-top:8px;border-top:1px solid rgba(255,255,255,.10);font:600 6px/1 var(--sans);letter-spacing:.17em;color:rgba(255,255,255,.55)}
+.daily-next strong{margin-left:5px;color:rgba(255,255,255,.92);font-variant-numeric:tabular-nums;letter-spacing:.13em}
+.daily-reveal.is-launch .daily-label,.daily-reveal.is-launch .daily-next{display:none}
+.daily-reveal.is-launch .daily-title{font-size:clamp(17px,1.45vw,23px);color:#f5afd5}
+
+@media (max-width:760px) and (orientation:portrait){
+  .daily-reveal{left:50%;bottom:132px;transform:translateX(-50%);width:min(270px,76vw);padding:10px 12px 9px;border-radius:13px}
+  .daily-title{font-size:13px;margin-top:6px}.daily-symbol{font-size:12px;margin:3px 0 5px}.daily-next{padding-top:6px}
+  .daily-day{font-size:6px}.daily-label,.daily-next{font-size:5.5px}
+}
+@media (orientation:landscape) and (max-height:700px){
+  .daily-reveal{left:12px;bottom:20px;width:190px;padding:8px 9px 7px;border-radius:12px}
+  .daily-ornament{font-size:7px;margin-bottom:2px}.daily-day{font-size:5px}.daily-label{font-size:4.5px;margin-top:4px}
+  .daily-title{font-size:10px;margin:5px auto 3px}.daily-symbol{font-size:9px;margin:2px 0 4px}.daily-next{font-size:4.5px;padding-top:5px}
+}

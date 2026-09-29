@@ -110,3 +110,114 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("music-prev")?.addEventListener("click", () => { if (musicReady) musicPlayer.previousVideo(); });
   document.getElementById("music-next")?.addEventListener("click", () => { if (musicReady) musicPlayer.nextVideo(); });
 });
+
+
+// Daily teaser reveal — changes every day at 11:11 AM Philippine time (UTC+8).
+// The master launch countdown above remains independent and always counts to 11.11.26.
+const DAILY_REVEAL_HOUR_PH = 11;
+const DAILY_REVEAL_MINUTE_PH = 11;
+const PH_OFFSET_MS = 8 * 60 * 60 * 1000;
+
+const DAILY_CLUES = [
+  "The wait is almost over.",
+  "Tomorrow, something beautiful opens.",
+  "Two hearts. One more sleep.",
+  "A little closer now.",
+  "Some stories arrive softly.",
+  "Keep this moment.",
+  "A page is waiting to turn.",
+  "Blue meets pink.",
+  "A quiet clue is hiding here.",
+  "Follow the little signs.",
+  "Eleven feels a little magical.",
+  "Made of moments worth keeping.",
+  "The archive is beginning to bloom.",
+  "A familiar song, a new chapter.",
+  "Look closely. Something is changing.",
+  "For every moment that made us smile.",
+  "Some memories deserve a home.",
+  "Two paths. One story.",
+  "A little piece of the story is waiting.",
+  "Save a little room for wonder.",
+  "The smallest details tell the sweetest stories.",
+  "A soft glow before the reveal.",
+  "Something lovely is taking shape.",
+  "For the moments between the moments.",
+  "A place for what we never want to forget.",
+  "The petals are starting to fall.",
+  "One day closer to the bloom.",
+  "There is more behind the curtain.",
+  "A story told in blue and pink.",
+  "Somewhere between memory and magic.",
+  "A little clue for those who came back.",
+  "The countdown has a story of its own.",
+  "Come back tomorrow. There is more.",
+  "Not everything beautiful arrives all at once.",
+  "The next page is getting closer.",
+  "A tiny secret for today.",
+  "The quiet before something special.",
+  "Every story starts somewhere.",
+  "Two little worlds are finding each other.",
+  "A bloom begins with one small sign.",
+  "Something worth keeping is coming.",
+  "For OomBam, with love.",
+  "Some things are worth waiting for."
+];
+const DAILY_SYMBOLS = ["✦","🌸","♡","☘","✧","🌸","♡","✦"];
+
+function phWallClock(nowMs = Date.now()) {
+  return new Date(nowMs + PH_OFFSET_MS);
+}
+
+function nextDailyRevealMs(nowMs = Date.now()) {
+  const ph = phWallClock(nowMs);
+  const y = ph.getUTCFullYear(), m = ph.getUTCMonth(), d = ph.getUTCDate();
+  let targetUtcWall = Date.UTC(y, m, d, DAILY_REVEAL_HOUR_PH, DAILY_REVEAL_MINUTE_PH, 0);
+  if (ph.getTime() >= targetUtcWall) targetUtcWall += 86400000;
+  return targetUtcWall - PH_OFFSET_MS;
+}
+
+function daysUntilLaunchByPHDate(nowMs = Date.now()) {
+  const ph = phWallClock(nowMs);
+  const today = Date.UTC(ph.getUTCFullYear(), ph.getUTCMonth(), ph.getUTCDate());
+  const launchDay = Date.UTC(2026, 10, 11);
+  return Math.max(0, Math.ceil((launchDay - today) / 86400000));
+}
+
+function updateDailyReveal() {
+  const now = Date.now();
+  const panel = document.getElementById("daily-reveal");
+  const dayNode = document.getElementById("daily-day");
+  const titleNode = document.getElementById("daily-title");
+  const symbolNode = document.getElementById("daily-symbol");
+  const timerNode = document.getElementById("daily-countdown");
+  if (!panel || !dayNode || !titleNode || !symbolNode || !timerNode) return;
+
+  if (now >= LAUNCH_DATE.getTime()) {
+    panel.classList.add("is-launch");
+    dayNode.textContent = "11 · 11 · 26";
+    titleNode.textContent = "THE WAIT IS OVER.";
+    symbolNode.textContent = "🌸";
+    timerNode.textContent = "00:00:00";
+    return;
+  }
+
+  panel.classList.remove("is-launch");
+  const daysLeft = daysUntilLaunchByPHDate(now);
+  const clueIndex = Math.max(0, Math.min(DAILY_CLUES.length - 1, daysLeft));
+  dayNode.textContent = `DAY ${String(daysLeft).padStart(2,"0")}`;
+  titleNode.textContent = `“${DAILY_CLUES[clueIndex]}”`;
+  symbolNode.textContent = DAILY_SYMBOLS[daysLeft % DAILY_SYMBOLS.length];
+
+  const remaining = Math.max(0, nextDailyRevealMs(now) - now);
+  const total = Math.floor(remaining / 1000);
+  const h = Math.floor(total / 3600);
+  const min = Math.floor((total % 3600) / 60);
+  const sec = total % 60;
+  timerNode.textContent = `${pad(h)}:${pad(min)}:${pad(sec)}`;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateDailyReveal();
+  window.setInterval(updateDailyReveal, 1000);
+});
