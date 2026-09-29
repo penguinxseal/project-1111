@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&family=Italianno&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="teaser.css?v=20260929-1111-6" />
+  <link rel="stylesheet" href="teaser.css?v=20260929-1111-7" />
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png"/>
@@ -50,7 +50,7 @@
 
     <!-- Live HTML typography -->
     <header class="top-brand sequence sequence-brand" aria-label="Penguin and Seal">
-      <span>PENGUIN</span><span class="heart">♥</span><span>SEAL</span>
+      <span>PENGUIN</span><button class="heart heart-easter" id="heart-easter" type="button" aria-label="A little heart between Penguin and Seal">♥</button><span>SEAL</span>
     </header>
 
     <section class="hero-copy" aria-labelledby="teaser-title">
@@ -73,26 +73,32 @@
           <div class="count-unit"><strong id="seconds">00</strong><span>SEC</span></div>
         </div>
         <p class="launch-date">11 · 11 · 26</p>
-        <p class="launch-time"><span class="launch-zone">10:11 AM TH</span><span class="launch-dot">·</span><span class="launch-zone">11:11 AM PH</span></p>
+        <p class="launch-time"><span class="launch-zone">10:11 PM TH</span><span class="launch-dot">·</span><span class="launch-zone">11:11 PM PH</span></p>
       </div>
     </section>
 
 
-      <section class="daily-reveal" id="daily-reveal" aria-labelledby="daily-title">
-        <div class="daily-ornament" aria-hidden="true">✦</div>
-        <p class="daily-day" id="daily-day">DAY 43</p>
-        <p class="daily-label">TODAY’S LITTLE CLUE</p>
-        <h2 class="daily-title" id="daily-title">“Some things are worth waiting for.”</h2>
-        <div class="daily-symbol" id="daily-symbol" aria-hidden="true">🌸</div>
-        <p class="daily-next"><span>NEXT REVEAL</span> <strong id="daily-countdown">00:00:00</strong></p>
-      </section>
+    <section class="daily-reveal" id="daily-reveal" aria-labelledby="daily-title">
+      <div class="daily-glow" aria-hidden="true"></div>
+      <div class="daily-ornament" id="daily-ornament" aria-hidden="true">✦</div>
+      <p class="daily-day" id="daily-day">DAY 43</p>
+      <p class="daily-label">TODAY’S LITTLE CLUE</p>
+      <h2 class="daily-title" id="daily-title">“Some things are worth waiting for.”</h2>
+      <div class="daily-symbols" id="daily-symbols" aria-hidden="true">🌸</div>
+      <button class="daily-yesterday" id="daily-yesterday" type="button" hidden>← YESTERDAY</button>
+      <div class="daily-previous" id="daily-previous" hidden>
+        <span id="previous-day"></span>
+        <q id="previous-clue"></q>
+      </div>
+      <p class="daily-next"><span>NEXT REVEAL</span> <strong id="daily-countdown">00:00:00</strong></p>
+    </section>
 
     <aside class="soundtrack" aria-label="Teaser soundtrack">
       <div class="music-player">
         <div class="music-meta">
           <span class="music-kicker">♪ SOUNDTRACK</span>
           <span class="music-title" id="music-title">OomBam Playlist</span>
-          <span class="music-status" id="music-status">Tap play to listen</span>
+          <span class="music-status" id="music-status">Trying to start the music…</span>
         </div>
         <div class="music-controls" aria-label="Music controls">
           <button class="music-btn" id="music-prev" type="button" aria-label="Previous song">‹</button>
@@ -109,8 +115,10 @@
       <span>DESIGNED WITH LOVE FOR OOMBAM</span><span class="thai-year" lang="th">๒๕๖๙</span>
     </footer>
 
+    <div class="heart-secret" id="heart-secret" role="status" aria-live="polite">You found a little something. ♡</div>
+    <div class="reveal-flash" id="reveal-flash" aria-hidden="true"><span>✦</span><strong>SOMETHING JUST BLOOMED</strong><span>🌸</span></div>
     <div class="vignette" aria-hidden="true"></div>
   </main>
-  <script src="teaser.js?v=20260929-1111-6" defer></script>
+  <script src="teaser.js?v=20260929-1111-7" defer></script>
 </body>
 </html>

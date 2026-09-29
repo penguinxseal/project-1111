@@ -926,36 +926,86 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   .footer{font-size:5px;color:rgba(255,255,255,.68)}
 }
 
-
 /* =====================================================================
-   PROJECT 1111 v6 — DAILY REVEAL
+   PROJECT 1111 v7 — 11:11 PM DAILY EXPERIENCE
    ===================================================================== */
-.daily-reveal{
-  position:absolute;z-index:36;left:clamp(24px,3.2vw,52px);bottom:clamp(52px,7vh,82px);
-  width:clamp(220px,18vw,290px);padding:14px 16px 13px;text-align:center;
-  border:1px solid rgba(255,255,255,.13);border-radius:16px;
-  background:linear-gradient(145deg,rgba(3,10,23,.72),rgba(19,8,23,.60));
-  box-shadow:0 14px 38px rgba(0,0,0,.22);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  color:#fffaf5;text-shadow:0 2px 10px rgba(0,0,0,.7);
-}
-.daily-reveal::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(115deg,rgba(154,223,255,.07),transparent 42%,rgba(242,168,205,.08))}
-.daily-ornament{position:relative;color:var(--pink);font-size:10px;margin-bottom:4px}
-.daily-day{position:relative;margin:0;font:700 7px/1 var(--sans);letter-spacing:.30em;color:rgba(255,255,255,.72)}
-.daily-label{position:relative;margin:7px 0 0;font:700 6px/1.2 var(--sans);letter-spacing:.25em;color:rgba(154,223,255,.82)}
-.daily-title{position:relative;margin:8px auto 5px;max-width:240px;font:500 clamp(14px,1.18vw,19px)/1.25 var(--serif);color:#fffaf5}
-.daily-symbol{position:relative;margin:4px 0 7px;font-size:14px;filter:drop-shadow(0 0 8px rgba(242,168,205,.3))}
-.daily-next{position:relative;margin:0;padding-top:8px;border-top:1px solid rgba(255,255,255,.10);font:600 6px/1 var(--sans);letter-spacing:.17em;color:rgba(255,255,255,.55)}
-.daily-next strong{margin-left:5px;color:rgba(255,255,255,.92);font-variant-numeric:tabular-nums;letter-spacing:.13em}
-.daily-reveal.is-launch .daily-label,.daily-reveal.is-launch .daily-next{display:none}
-.daily-reveal.is-launch .daily-title{font-size:clamp(17px,1.45vw,23px);color:#f5afd5}
+:root{--bloom-progress:0}
 
+/* Launch copy corrected to PM; hierarchy stays intentionally restrained. */
+.count-unit span{font-size:clamp(7px,.58vw,9px)!important;color:rgba(255,255,255,.88)!important}
+.launch-time{font-size:clamp(9px,.76vw,12px)!important;color:rgba(255,255,255,.98)!important}
+.footer{font-size:clamp(7px,.52vw,9px)!important;color:rgba(255,255,255,.78)!important}
+.music-kicker{font-size:8px!important;color:rgba(255,255,255,.82)!important}
+.music-title{font-size:11px!important}.music-status{font-size:8px!important;color:rgba(255,255,255,.72)!important}
+.music-foot{font-size:7px!important;color:rgba(255,255,255,.62)!important}
+
+/* Progressive bloom: very subtle early, richer toward launch. */
+.ambient-motion{filter:saturate(calc(1 + var(--bloom-progress)*.16))}
+.clover{opacity:calc(.58 + var(--bloom-progress)*.24)!important}
+.petal{opacity:calc(.72 + var(--bloom-progress)*.25)!important}
+.droplet{opacity:calc(.72 + var(--bloom-progress)*.24)!important}
+
+/* Daily Reveal — secondary to the master countdown. */
+.daily-reveal{
+  position:absolute;z-index:26;left:clamp(24px,3vw,52px);bottom:clamp(48px,7vh,78px);
+  width:clamp(250px,21vw,330px);padding:17px 19px 14px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);border-radius:18px;
+  background:linear-gradient(135deg,rgba(5,15,29,.69),rgba(25,8,23,.60));
+  box-shadow:0 16px 42px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  text-shadow:0 2px 10px rgba(0,0,0,.68)
+}
+.daily-reveal::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,rgba(154,223,255,.15),rgba(154,223,255,.9),rgba(242,168,205,.9),rgba(242,168,205,.15))}
+.daily-glow{position:absolute;inset:-40%;pointer-events:none;background:radial-gradient(circle at 15% 25%,rgba(154,223,255,.10),transparent 38%),radial-gradient(circle at 90% 75%,rgba(242,168,205,.10),transparent 40%)}
+.daily-ornament{position:absolute;right:16px;top:13px;color:rgba(255,255,255,.60);font-size:12px}
+.daily-day,.daily-label,.daily-title,.daily-symbols,.daily-next{position:relative;margin:0}
+.daily-day{font-size:11px;font-weight:700;letter-spacing:.24em;color:#fff}
+.daily-label{margin-top:5px;font-size:7px;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.64)}
+.daily-title{margin-top:10px;max-width:95%;font-family:var(--serif);font-size:clamp(15px,1.05vw,19px);line-height:1.25;font-weight:500;color:#fffaf5}
+.daily-symbols{min-height:19px;margin-top:9px;font-size:15px;letter-spacing:.12em;filter:drop-shadow(0 2px 7px rgba(0,0,0,.42))}
+.daily-next{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:9px;border-top:1px solid rgba(255,255,255,.09);font-size:7px;font-weight:600;letter-spacing:.16em;color:rgba(255,255,255,.61)}
+.daily-next strong{font-size:9px;color:rgba(255,255,255,.94);letter-spacing:.11em}
+.daily-yesterday{position:relative;margin:8px 0 0;padding:0;border:0;background:none;color:rgba(255,255,255,.61);font:600 7px var(--sans);letter-spacing:.17em;cursor:pointer}
+.daily-yesterday:hover,.daily-yesterday:focus-visible{color:#fff}
+.daily-previous{position:relative;margin-top:8px;padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.80)}
+.daily-previous span{display:block;margin-bottom:4px;font-size:6px;font-weight:700;letter-spacing:.17em;color:rgba(154,223,255,.82)}
+.daily-previous q{font:500 11px/1.35 var(--serif)}
+.daily-reveal.is-launch{border-color:rgba(242,168,205,.40);box-shadow:0 0 38px rgba(242,168,205,.16),0 16px 42px rgba(0,0,0,.25)}
+.daily-reveal.just-bloomed{animation:dailyBloom 1.8s ease}
+@keyframes dailyBloom{0%{transform:scale(1)}28%{transform:scale(1.025);box-shadow:0 0 42px rgba(242,168,205,.25),0 16px 42px rgba(0,0,0,.25)}100%{transform:scale(1)}}
+
+/* Midnight-style reveal moment at the actual 11:11 PM rollover. */
+.reveal-flash{position:absolute;z-index:80;left:50%;top:50%;display:flex;flex-direction:column;align-items:center;gap:10px;transform:translate(-50%,-50%) scale(.96);padding:24px 32px;border-radius:22px;background:rgba(3,7,17,.72);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(16px);opacity:0;visibility:hidden;pointer-events:none;text-align:center;box-shadow:0 20px 80px rgba(0,0,0,.34)}
+.reveal-flash strong{font-size:10px;letter-spacing:.28em;color:#fff}.reveal-flash span{font-size:19px}
+.reveal-flash.is-active{visibility:visible;animation:revealMoment 3.6s ease both}
+@keyframes revealMoment{0%{opacity:0;transform:translate(-50%,-50%) scale(.94)}18%,68%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.02)}}
+
+/* Penguin ♥ Seal easter egg. */
+.heart-easter{appearance:none;-webkit-appearance:none;padding:4px;margin:-4px;border:0;background:transparent;font:inherit;cursor:pointer}
+.heart-secret{position:absolute;z-index:70;left:50%;top:10%;transform:translate(-50%,-8px);padding:9px 14px;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(3,7,17,.68);backdrop-filter:blur(10px);color:rgba(255,255,255,.94);font-size:9px;letter-spacing:.08em;opacity:0;visibility:hidden;pointer-events:none}
+.heart-secret.is-visible{visibility:visible;animation:secretMessage 2.6s ease both}
+@keyframes secretMessage{0%{opacity:0;transform:translate(-50%,-5px)}18%,70%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-5px)}}
+.teaser.heart-found::before{content:"♡";position:absolute;z-index:69;left:50%;top:8%;color:#f5afd5;font-size:18px;pointer-events:none;animation:heartTravel 1.7s ease both}
+@keyframes heartTravel{0%{opacity:0;transform:translate(-50%,0) scale(.7)}20%{opacity:1}100%{opacity:0;transform:translate(10vw,18vh) scale(1.25)}}
+
+/* Responsive stacking: daily clue left, soundtrack right on wide screens;
+   compact cards below the master countdown on portrait/mobile. */
+@media (max-width:1100px) and (orientation:portrait){
+  .daily-reveal{left:18px;right:18px;bottom:118px;width:auto;padding:12px 14px 10px;border-radius:14px}
+  .daily-title{margin-top:6px;font-size:13px}.daily-symbols{margin-top:5px;font-size:13px;min-height:16px}
+  .daily-next{margin-top:6px;padding-top:6px}.daily-yesterday{margin-top:5px}
+  .soundtrack{right:18px!important;bottom:42px!important;width:190px!important;transform:none!important}
+  .footer{bottom:14px!important}
+}
 @media (max-width:760px) and (orientation:portrait){
-  .daily-reveal{left:50%;bottom:132px;transform:translateX(-50%);width:min(270px,76vw);padding:10px 12px 9px;border-radius:13px}
-  .daily-title{font-size:13px;margin-top:6px}.daily-symbol{font-size:12px;margin:3px 0 5px}.daily-next{padding-top:6px}
-  .daily-day{font-size:6px}.daily-label,.daily-next{font-size:5.5px}
+  .daily-reveal{left:12px;right:12px;bottom:112px;padding:10px 12px 9px}
+  .daily-day{font-size:9px}.daily-label{font-size:6px}.daily-title{font-size:12px;line-height:1.2}.daily-symbols{font-size:12px}
+  .daily-next{font-size:6px}.daily-next strong{font-size:8px}.daily-yesterday{font-size:6px}
+  .music-kicker{font-size:6.5px!important}.music-title{font-size:9px!important}.music-status{font-size:6.5px!important}.music-foot{font-size:6px!important}
 }
 @media (orientation:landscape) and (max-height:700px){
-  .daily-reveal{left:12px;bottom:20px;width:190px;padding:8px 9px 7px;border-radius:12px}
-  .daily-ornament{font-size:7px;margin-bottom:2px}.daily-day{font-size:5px}.daily-label{font-size:4.5px;margin-top:4px}
-  .daily-title{font-size:10px;margin:5px auto 3px}.daily-symbol{font-size:9px;margin:2px 0 4px}.daily-next{font-size:4.5px;padding-top:5px}
+  .daily-reveal{left:14px;bottom:30px;width:210px;padding:9px 11px 8px;border-radius:12px}
+  .daily-day{font-size:8px}.daily-label{font-size:5px}.daily-title{margin-top:5px;font-size:10px}.daily-symbols{margin-top:4px;min-height:12px;font-size:10px}.daily-next{margin-top:4px;padding-top:4px;font-size:5px}.daily-next strong{font-size:6px}.daily-yesterday{font-size:5px;margin-top:3px}
+  .soundtrack{right:14px!important;bottom:30px!important;width:170px!important}
 }
+@media (prefers-reduced-motion:reduce){.daily-reveal.just-bloomed,.reveal-flash.is-active,.heart-secret.is-visible,.teaser.heart-found::before{animation:none!important}.reveal-flash{display:none}.heart-secret.is-visible{opacity:1;visibility:visible}}

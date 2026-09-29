@@ -1,47 +1,170 @@
-// Project 1111 teaser
-// Launch: 11 Nov 2026, 11:11 Manila (UTC+8) / 10:11 Bangkok (UTC+7)
+// Project 1111 — v7
+// Master launch: 11 Nov 2026, 11:11 PM Philippine time (UTC+8) / 10:11 PM Thailand time (UTC+7).
+// Daily teaser rollover: every day at 11:11 PM Philippine time.
 
-const LAUNCH_DATE = new Date("2026-11-11T11:11:00+08:00");
+const LAUNCH_DATE = new Date("2026-11-11T23:11:00+08:00");
+const PH_OFFSET_MS = 8 * 60 * 60 * 1000;
+const DAY_MS = 86400000;
+const DAILY_REVEAL_HOUR_PH = 23;
+const DAILY_REVEAL_MINUTE_PH = 11;
 
-function pad(value) {
-  return String(value).padStart(2, "0");
+const DAILY_TEASERS = {
+  43: { message: "Some things are worth waiting for.", icons: ["☘", "🩵"] },
+  42: { message: "Every story starts somewhere.", icons: ["✦", "☁️"] },
+  41: { message: "Two paths. One story.", icons: ["🐧", "🦭"] },
+  40: { message: "A little closer than yesterday.", icons: ["🩵", "🩷"] },
+  39: { message: "It started with a moment.", icons: ["⭐", "🤍"] },
+  38: { message: "Then came another.", icons: ["🌸", "✦"] },
+  37: { message: "And somehow, we kept them all.", icons: ["🤍", "⭐"] },
+  36: { message: "Some memories deserve a home.", icons: ["☁️", "🤍"] },
+  35: { message: "A little blue. A little pink.", icons: ["🩵", "🩷"] },
+  34: { message: "And perhaps a little magic.", icons: ["⭐", "🌸"] },
+  33: { message: "Look closely. There are clues everywhere.", icons: ["☘", "✦"] },
+  32: { message: "Not everything beautiful needs explaining.", icons: ["☁️", "🌸"] },
+  31: { message: "One month closer.", icons: ["☀️", "🤍"] },
+  30: { message: "The archive is stirring.", icons: ["⭐", "☘"] },
+  29: { message: "Every chapter has a beginning.", icons: ["🌸", "🤍"] },
+  28: { message: "Every moment leaves something behind.", icons: ["☁️", "⭐"] },
+  27: { message: "We decided to keep those pieces.", icons: ["🩵", "🤍"] },
+  26: { message: "For the moments we replay.", icons: ["✦", "🩷"] },
+  25: { message: "For the words we remember.", icons: ["🤍", "☘"] },
+  24: { message: "For the smiles that started everything.", icons: ["☀️", "🌸"] },
+  23: { message: "Two names. Countless moments.", icons: ["🐧", "🦭"] },
+  22: { message: "Oom × Bam.", icons: ["🐧", "🩵", "🩷", "🦭"] },
+  21: { message: "Now you know who. Not yet what.", icons: ["✦", "🤍"] },
+  20: { message: "Twenty days until the doors open.", icons: ["☀️", "⭐"] },
+  19: { message: "Built from moments.", icons: ["☘", "🩵"] },
+  18: { message: "Curated with care.", icons: ["🤍", "🌸"] },
+  17: { message: "Preserved with love.", icons: ["🩷", "🤍"] },
+  16: { message: "Made by fans, for fans.", icons: ["🩵", "🩷"] },
+  15: { message: "There’s more behind the bloom.", icons: ["🌸", "✦"] },
+  14: { message: "Two weeks. Shall we show you a little more?", icons: ["☁️", "⭐"] },
+  13: { message: "Stories. Moments. Memories.", icons: ["🤍", "🌸"] },
+  12: { message: "All finding their way home.", icons: ["🐧", "🦭"] },
+  11: { message: "11 days. Of course it had to be eleven.", icons: ["⭐", "⭐"] },
+  10: { message: "The final ten begins.", icons: ["☀️", "✦"] },
+   9: { message: "Nine nights until the doors open.", icons: ["☁️", "⭐"] },
+   8: { message: "The pieces are falling into place.", icons: ["☘", "🌸"] },
+   7: { message: "One week.", icons: ["🩵", "🩷"] },
+   6: { message: "Something beautiful is almost ready.", icons: ["🌸", "🤍"] },
+   5: { message: "Five nights. Keep your eyes here.", icons: ["⭐", "✦"] },
+   4: { message: "The wait is getting shorter.", icons: ["☀️", "🌸"] },
+   3: { message: "Three.", icons: ["🐧", "🤍", "🦭"] },
+   2: { message: "Two.", icons: ["🩵", "🩷"] },
+   1: { message: "One more sleep.", icons: ["🌸", "🤍", "🌸"] },
+   0: { message: "Tonight, something beautiful blooms.", icons: ["🐧", "🌸", "🦭"] }
+};
+
+function pad(value) { return String(value).padStart(2, "0"); }
+function phWallClock(nowMs = Date.now()) { return new Date(nowMs + PH_OFFSET_MS); }
+function phMinutesOfDay(nowMs = Date.now()) {
+  const ph = phWallClock(nowMs);
+  return ph.getUTCHours() * 60 + ph.getUTCMinutes() + ph.getUTCSeconds() / 60;
 }
 
 function updateCountdown() {
   const remaining = Math.max(0, LAUNCH_DATE.getTime() - Date.now());
   const totalSeconds = Math.floor(remaining / 1000);
-
-  const days = Math.floor(totalSeconds / 86400);
-  const hours = Math.floor((totalSeconds % 86400) / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  const values = { days, hours, minutes, seconds };
+  const values = {
+    days: Math.floor(totalSeconds / 86400),
+    hours: Math.floor((totalSeconds % 86400) / 3600),
+    minutes: Math.floor((totalSeconds % 3600) / 60),
+    seconds: totalSeconds % 60
+  };
   Object.entries(values).forEach(([id, value]) => {
     const node = document.getElementById(id);
     if (node) node.textContent = pad(value);
   });
-
-  if (remaining === 0) {
-    const countdown = document.getElementById("countdown");
-    if (countdown) countdown.setAttribute("aria-label", "The wait is over");
-  }
+  if (remaining === 0) document.getElementById("countdown")?.setAttribute("aria-label", "The wait is over");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.documentElement.classList.add("teaser-ready");
-  updateCountdown();
-  window.setInterval(updateCountdown, 1000);
-});
+function nextDailyRevealMs(nowMs = Date.now()) {
+  const ph = phWallClock(nowMs);
+  const y = ph.getUTCFullYear(), m = ph.getUTCMonth(), d = ph.getUTCDate();
+  let targetWall = Date.UTC(y, m, d, DAILY_REVEAL_HOUR_PH, DAILY_REVEAL_MINUTE_PH, 0);
+  if (ph.getTime() >= targetWall) targetWall += DAY_MS;
+  return targetWall - PH_OFFSET_MS;
+}
 
+function campaignDay(nowMs = Date.now()) {
+  const ph = phWallClock(nowMs);
+  const today = Date.UTC(ph.getUTCFullYear(), ph.getUTCMonth(), ph.getUTCDate());
+  const launchDay = Date.UTC(2026, 10, 11);
+  let day = Math.round((launchDay - today) / DAY_MS);
+  const revealMinute = DAILY_REVEAL_HOUR_PH * 60 + DAILY_REVEAL_MINUTE_PH;
+  if (phMinutesOfDay(nowMs) >= revealMinute) day -= 1;
+  return Math.max(0, Math.min(43, day));
+}
 
-// Minimal YouTube-backed soundtrack controls.
-// Audible playback begins only after the visitor presses Play when required by browser autoplay policy.
+let lastDailyDay = null;
+function updateDailyReveal() {
+  const now = Date.now();
+  const panel = document.getElementById("daily-reveal");
+  const dayNode = document.getElementById("daily-day");
+  const titleNode = document.getElementById("daily-title");
+  const symbolsNode = document.getElementById("daily-symbols");
+  const timerNode = document.getElementById("daily-countdown");
+  if (!panel || !dayNode || !titleNode || !symbolsNode || !timerNode) return;
+
+  if (now >= LAUNCH_DATE.getTime()) {
+    panel.classList.add("is-launch");
+    dayNode.textContent = "11 · 11 · 26";
+    titleNode.textContent = "THE WAIT IS OVER.";
+    symbolsNode.textContent = "🌸  🤍  🌸";
+    timerNode.textContent = "00:00:00";
+    return;
+  }
+
+  panel.classList.remove("is-launch");
+  const day = campaignDay(now);
+  const teaser = DAILY_TEASERS[day] || DAILY_TEASERS[43];
+  dayNode.textContent = day === 0 ? "FINAL 24 HOURS" : `DAY ${pad(day)}`;
+  titleNode.textContent = `“${teaser.message}”`;
+  symbolsNode.textContent = teaser.icons.join("  ");
+
+  const remaining = Math.max(0, Math.min(nextDailyRevealMs(now), LAUNCH_DATE.getTime()) - now);
+  const total = Math.floor(remaining / 1000);
+  timerNode.textContent = `${pad(Math.floor(total / 3600))}:${pad(Math.floor((total % 3600) / 60))}:${pad(total % 60)}`;
+
+  if (lastDailyDay !== null && lastDailyDay !== day) playRevealMoment();
+  lastDailyDay = day;
+  updateYesterday(day);
+  updateBloomLevel(day);
+}
+
+function updateYesterday(day) {
+  const button = document.getElementById("daily-yesterday");
+  const box = document.getElementById("daily-previous");
+  if (!button || !box) return;
+  const yesterdayDay = Math.min(43, day + 1);
+  const hasYesterday = yesterdayDay !== day && DAILY_TEASERS[yesterdayDay];
+  button.hidden = !hasYesterday;
+  if (!hasYesterday) box.hidden = true;
+  button.dataset.day = String(yesterdayDay);
+}
+
+function updateBloomLevel(day) {
+  const progress = Math.max(0, Math.min(1, (43 - day) / 43));
+  document.documentElement.style.setProperty("--bloom-progress", progress.toFixed(3));
+}
+
+function playRevealMoment() {
+  const flash = document.getElementById("reveal-flash");
+  const panel = document.getElementById("daily-reveal");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  flash?.classList.remove("is-active");
+  panel?.classList.remove("just-bloomed");
+  void flash?.offsetWidth;
+  flash?.classList.add("is-active");
+  panel?.classList.add("just-bloomed");
+  setTimeout(() => flash?.classList.remove("is-active"), 3600);
+  setTimeout(() => panel?.classList.remove("just-bloomed"), 1800);
+}
+
+// YouTube-backed custom soundtrack. We request audible autoplay; browsers may block it.
 const MUSIC_VIDEOS = ["RHnPq3Z0A8c", "CKclkO6HHrY", "O4Aigpyt4Uc"];
 const MUSIC_LABELS = ["Oom Eisaya", "Bam Saralee", "OomBam Playlist"];
-let musicPlayer = null;
-let musicReady = false;
-let musicProgressTimer = null;
+let musicPlayer = null, musicReady = false, musicProgressTimer = null, autoplayBlocked = false;
 
 function updateMusicUI(index = 0, playing = false) {
   const title = document.getElementById("music-title");
@@ -49,8 +172,8 @@ function updateMusicUI(index = 0, playing = false) {
   const track = document.getElementById("music-track");
   const toggle = document.getElementById("music-toggle");
   if (title) title.textContent = MUSIC_LABELS[index] || "OomBam Playlist";
-  if (status) status.textContent = playing ? "Now playing" : "Tap play to listen";
-  if (track) track.textContent = `${String(index + 1).padStart(2,"0")} / ${String(MUSIC_VIDEOS.length).padStart(2,"0")}`;
+  if (status) status.textContent = playing ? "Playing while we wait…" : (autoplayBlocked ? "Tap anywhere to start the music" : "Tap play to listen");
+  if (track) track.textContent = `${pad(index + 1)} / ${pad(MUSIC_VIDEOS.length)}`;
   if (toggle) { toggle.textContent = playing ? "❚❚" : "▶"; toggle.setAttribute("aria-label", playing ? "Pause soundtrack" : "Play soundtrack"); }
 }
 
@@ -61,38 +184,44 @@ function startMusicProgress() {
     const duration = musicPlayer.getDuration() || 0;
     const current = musicPlayer.getCurrentTime() || 0;
     const bar = document.getElementById("music-progress-bar");
-    if (bar) bar.style.width = duration ? `${Math.min(100,(current/duration)*100)}%` : "0%";
+    if (bar) bar.style.width = duration ? `${Math.min(100, (current / duration) * 100)}%` : "0%";
   }, 750);
+}
+
+function attemptMusicStart() {
+  if (!musicReady || !musicPlayer) return;
+  try { musicPlayer.unMute?.(); musicPlayer.setVolume?.(55); musicPlayer.playVideo?.(); } catch (_) {}
 }
 
 window.onYouTubeIframeAPIReady = function () {
   musicPlayer = new YT.Player("yt-player", {
-    width: 200,
-    height: 200,
-    videoId: MUSIC_VIDEOS[0],
-    playerVars: { playsinline: 1, controls: 0, rel: 0, origin: window.location.origin },
+    width: 200, height: 200, videoId: MUSIC_VIDEOS[0],
+    playerVars: { autoplay: 1, playsinline: 1, controls: 0, rel: 0, origin: window.location.origin },
     events: {
       onReady: (event) => {
         musicReady = true;
         event.target.cuePlaylist(MUSIC_VIDEOS, 0, 0);
         event.target.setLoop(true);
+        event.target.setVolume(55);
         updateMusicUI(0, false);
         startMusicProgress();
+        setTimeout(attemptMusicStart, 250);
       },
       onStateChange: (event) => {
-        if (!musicPlayer) return;
-        const index = Math.max(0, musicPlayer.getPlaylistIndex?.() ?? 0);
-        updateMusicUI(index, event.data === YT.PlayerState.PLAYING);
-        if (event.data === YT.PlayerState.ENDED) musicPlayer.nextVideo();
+        const index = Math.max(0, musicPlayer?.getPlaylistIndex?.() ?? 0);
+        const playing = event.data === YT.PlayerState.PLAYING;
+        if (playing) autoplayBlocked = false;
+        updateMusicUI(index, playing);
+        if (event.data === YT.PlayerState.ENDED) musicPlayer?.nextVideo?.();
       },
-      onAutoplayBlocked: () => updateMusicUI(Math.max(0, musicPlayer?.getPlaylistIndex?.() ?? 0), false)
+      onAutoplayBlocked: () => { autoplayBlocked = true; updateMusicUI(Math.max(0, musicPlayer?.getPlaylistIndex?.() ?? 0), false); }
     }
   });
 };
 
 function loadYouTubeAPI() {
   if (window.YT?.Player) return window.onYouTubeIframeAPIReady();
-  if (document.querySelector('script[data-youtube-api]')) return;
+  if (document.querySelector("script[data-youtube-api]")) return;
   const script = document.createElement("script");
   script.src = "https://www.youtube.com/iframe_api";
   script.async = true;
@@ -100,124 +229,52 @@ function loadYouTubeAPI() {
   document.head.appendChild(script);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadYouTubeAPI();
-  document.getElementById("music-toggle")?.addEventListener("click", () => {
+function setupInteractions() {
+  document.getElementById("music-toggle")?.addEventListener("click", (event) => {
+    event.stopPropagation();
     if (!musicReady || !musicPlayer) return;
-    const state = musicPlayer.getPlayerState();
-    if (state === YT.PlayerState.PLAYING) musicPlayer.pauseVideo(); else musicPlayer.playVideo();
+    if (musicPlayer.getPlayerState() === YT.PlayerState.PLAYING) musicPlayer.pauseVideo(); else attemptMusicStart();
   });
-  document.getElementById("music-prev")?.addEventListener("click", () => { if (musicReady) musicPlayer.previousVideo(); });
-  document.getElementById("music-next")?.addEventListener("click", () => { if (musicReady) musicPlayer.nextVideo(); });
-});
+  document.getElementById("music-prev")?.addEventListener("click", (event) => { event.stopPropagation(); if (musicReady) musicPlayer.previousVideo(); });
+  document.getElementById("music-next")?.addEventListener("click", (event) => { event.stopPropagation(); if (musicReady) musicPlayer.nextVideo(); });
 
+  // If autoplay was blocked, the visitor's first ordinary interaction can unlock audio.
+  const unlock = () => { if (autoplayBlocked) attemptMusicStart(); };
+  document.addEventListener("pointerdown", unlock, { once: true, passive: true });
+  document.addEventListener("keydown", unlock, { once: true });
 
-// Daily teaser reveal — changes every day at 11:11 AM Philippine time (UTC+8).
-// The master launch countdown above remains independent and always counts to 11.11.26.
-const DAILY_REVEAL_HOUR_PH = 11;
-const DAILY_REVEAL_MINUTE_PH = 11;
-const PH_OFFSET_MS = 8 * 60 * 60 * 1000;
+  document.getElementById("daily-yesterday")?.addEventListener("click", () => {
+    const button = document.getElementById("daily-yesterday");
+    const box = document.getElementById("daily-previous");
+    const day = Number(button?.dataset.day || 0);
+    const teaser = DAILY_TEASERS[day];
+    if (!box || !teaser) return;
+    document.getElementById("previous-day").textContent = `DAY ${pad(day)}`;
+    document.getElementById("previous-clue").textContent = teaser.message;
+    box.hidden = !box.hidden;
+    button.textContent = box.hidden ? "← YESTERDAY" : "CLOSE MEMORY ×";
+  });
 
-const DAILY_CLUES = [
-  "The wait is almost over.",
-  "Tomorrow, something beautiful opens.",
-  "Two hearts. One more sleep.",
-  "A little closer now.",
-  "Some stories arrive softly.",
-  "Keep this moment.",
-  "A page is waiting to turn.",
-  "Blue meets pink.",
-  "A quiet clue is hiding here.",
-  "Follow the little signs.",
-  "Eleven feels a little magical.",
-  "Made of moments worth keeping.",
-  "The archive is beginning to bloom.",
-  "A familiar song, a new chapter.",
-  "Look closely. Something is changing.",
-  "For every moment that made us smile.",
-  "Some memories deserve a home.",
-  "Two paths. One story.",
-  "A little piece of the story is waiting.",
-  "Save a little room for wonder.",
-  "The smallest details tell the sweetest stories.",
-  "A soft glow before the reveal.",
-  "Something lovely is taking shape.",
-  "For the moments between the moments.",
-  "A place for what we never want to forget.",
-  "The petals are starting to fall.",
-  "One day closer to the bloom.",
-  "There is more behind the curtain.",
-  "A story told in blue and pink.",
-  "Somewhere between memory and magic.",
-  "A little clue for those who came back.",
-  "The countdown has a story of its own.",
-  "Come back tomorrow. There is more.",
-  "Not everything beautiful arrives all at once.",
-  "The next page is getting closer.",
-  "A tiny secret for today.",
-  "The quiet before something special.",
-  "Every story starts somewhere.",
-  "Two little worlds are finding each other.",
-  "A bloom begins with one small sign.",
-  "Something worth keeping is coming.",
-  "For OomBam, with love.",
-  "Some things are worth waiting for."
-];
-const DAILY_SYMBOLS = ["✦","🌸","♡","☘","✧","🌸","♡","✦"];
-
-function phWallClock(nowMs = Date.now()) {
-  return new Date(nowMs + PH_OFFSET_MS);
-}
-
-function nextDailyRevealMs(nowMs = Date.now()) {
-  const ph = phWallClock(nowMs);
-  const y = ph.getUTCFullYear(), m = ph.getUTCMonth(), d = ph.getUTCDate();
-  let targetUtcWall = Date.UTC(y, m, d, DAILY_REVEAL_HOUR_PH, DAILY_REVEAL_MINUTE_PH, 0);
-  if (ph.getTime() >= targetUtcWall) targetUtcWall += 86400000;
-  return targetUtcWall - PH_OFFSET_MS;
-}
-
-function daysUntilLaunchByPHDate(nowMs = Date.now()) {
-  const ph = phWallClock(nowMs);
-  const today = Date.UTC(ph.getUTCFullYear(), ph.getUTCMonth(), ph.getUTCDate());
-  const launchDay = Date.UTC(2026, 10, 11);
-  return Math.max(0, Math.ceil((launchDay - today) / 86400000));
-}
-
-function updateDailyReveal() {
-  const now = Date.now();
-  const panel = document.getElementById("daily-reveal");
-  const dayNode = document.getElementById("daily-day");
-  const titleNode = document.getElementById("daily-title");
-  const symbolNode = document.getElementById("daily-symbol");
-  const timerNode = document.getElementById("daily-countdown");
-  if (!panel || !dayNode || !titleNode || !symbolNode || !timerNode) return;
-
-  if (now >= LAUNCH_DATE.getTime()) {
-    panel.classList.add("is-launch");
-    dayNode.textContent = "11 · 11 · 26";
-    titleNode.textContent = "THE WAIT IS OVER.";
-    symbolNode.textContent = "🌸";
-    timerNode.textContent = "00:00:00";
-    return;
-  }
-
-  panel.classList.remove("is-launch");
-  const daysLeft = daysUntilLaunchByPHDate(now);
-  const clueIndex = Math.max(0, Math.min(DAILY_CLUES.length - 1, daysLeft));
-  dayNode.textContent = `DAY ${String(daysLeft).padStart(2,"0")}`;
-  titleNode.textContent = `“${DAILY_CLUES[clueIndex]}”`;
-  symbolNode.textContent = DAILY_SYMBOLS[daysLeft % DAILY_SYMBOLS.length];
-
-  const remaining = Math.max(0, nextDailyRevealMs(now) - now);
-  const total = Math.floor(remaining / 1000);
-  const h = Math.floor(total / 3600);
-  const min = Math.floor((total % 3600) / 60);
-  const sec = total % 60;
-  timerNode.textContent = `${pad(h)}:${pad(min)}:${pad(sec)}`;
+  document.getElementById("heart-easter")?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const secret = document.getElementById("heart-secret");
+    const teaser = document.getElementById("teaser");
+    secret?.classList.remove("is-visible");
+    teaser?.classList.remove("heart-found");
+    void secret?.offsetWidth;
+    secret?.classList.add("is-visible");
+    teaser?.classList.add("heart-found");
+    setTimeout(() => secret?.classList.remove("is-visible"), 2600);
+    setTimeout(() => teaser?.classList.remove("heart-found"), 1800);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.classList.add("teaser-ready");
+  updateCountdown();
   updateDailyReveal();
+  loadYouTubeAPI();
+  setupInteractions();
+  window.setInterval(updateCountdown, 1000);
   window.setInterval(updateDailyReveal, 1000);
 });
