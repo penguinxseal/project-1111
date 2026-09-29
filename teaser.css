@@ -1626,3 +1626,158 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
 .easter-message-732.oombam{
   box-shadow:0 5px 24px rgba(0,0,0,.10),-8px 0 22px rgba(151,218,255,.07),8px 0 22px rgba(242,168,205,.08)!important;
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v7.4 — RESPONSIVE FLOATING EASTER-EGG REVEALS
+   Desktop + tablet landscape + tablet portrait + mobile
+   ===================================================================== */
+
+/* The OomBam word in the disclaimer is secretly interactive but visually
+   remains part of the sentence. */
+.disclaimer-oombam-secret{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:inline!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+  font:inherit!important;
+  letter-spacing:inherit!important;
+  line-height:inherit!important;
+  text-transform:inherit!important;
+  text-shadow:inherit!important;
+  cursor:default!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+/* Kill the notification/pill appearance completely.
+   This is now typography that appears to belong to the page itself. */
+.easter-message-732{
+  position:fixed!important;
+  z-index:2147483647!important;
+  left:50%!important;
+  top:auto!important;
+  bottom:18.5vh!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:min(620px,70vw)!important;
+  transform:translate(-50%,8px)!important;
+  box-sizing:border-box!important;
+  padding:4px 10px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+  color:rgba(255,255,255,.98)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.98)!important;
+  font-family:"DM Sans",Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  line-height:1.4!important;
+  letter-spacing:.035em!important;
+  text-align:center!important;
+  white-space:normal!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.82),
+    0 0 12px rgba(255,255,255,.16)!important;
+  transition:opacity .22s ease,transform .22s ease!important;
+}
+.easter-message-732.show{
+  visibility:visible!important;
+  opacity:1!important;
+  transform:translate(-50%,0)!important;
+}
+
+/* Keep the character-specific atmosphere through text glow only. */
+.easter-message-732.oom{
+  text-shadow:0 2px 8px rgba(0,0,0,.82),0 0 15px rgba(151,218,255,.48)!important;
+}
+.easter-message-732.bam{
+  text-shadow:0 2px 8px rgba(0,0,0,.82),0 0 15px rgba(242,168,205,.52)!important;
+}
+.easter-message-732.pair,
+.easter-message-732.heart,
+.easter-message-732.oombam{
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.82),
+    -4px 0 14px rgba(151,218,255,.28),
+    4px 0 14px rgba(242,168,205,.36)!important;
+}
+
+/* Desktop: reveal below the identity / above the central countdown zone,
+   away from Penguin and Seal. */
+@media (min-width:1101px){
+  .easter-message-732{
+    bottom:18.5vh!important;
+    max-width:600px!important;
+  }
+}
+
+/* Tablet landscape: use the central lower hero area. */
+@media (min-width:761px) and (max-width:1100px) and (orientation:landscape){
+  .easter-message-732{
+    top:auto!important;
+    bottom:22vh!important;
+    max-width:64vw!important;
+    font-size:11.5px!important;
+  }
+}
+
+/* Tablet portrait: place reveal in the breathing room below artwork and
+   before the primary copy/cards. */
+@media (min-width:761px) and (max-width:1100px) and (orientation:portrait){
+  .easter-message-732{
+    top:43vh!important;
+    bottom:auto!important;
+    width:76vw!important;
+    max-width:620px!important;
+    font-size:12px!important;
+  }
+}
+
+/* Mobile portrait: intentionally use the large negative-space band below
+   Penguin/Seal and above the disclaimer. */
+@media (max-width:760px) and (orientation:portrait){
+  .easter-message-732{
+    top:315px!important;
+    bottom:auto!important;
+    width:calc(100vw - 54px)!important;
+    max-width:520px!important;
+    padding:3px 8px!important;
+    font-size:11.5px!important;
+    line-height:1.35!important;
+  }
+}
+
+/* Mobile landscape: closer to tablet-landscape behavior. */
+@media (max-width:760px) and (orientation:landscape){
+  .easter-message-732{
+    top:auto!important;
+    bottom:19vh!important;
+    width:68vw!important;
+    max-width:520px!important;
+    font-size:10.5px!important;
+  }
+}
+
+/* Preserve preferred pink identity. */
+.identity,
+.identity button,
+.identity .identity-secret,
+.identity .identity-oom,
+.identity .identity-bam,
+.identity .pair-x{
+  color:#f2a8cd!important;
+  -webkit-text-fill-color:#f2a8cd!important;
+}

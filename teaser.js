@@ -344,6 +344,7 @@ function setupInteractions() {
   bindSecretTarget("secret-oom", "You found a little luck. ☘️🩵", "☘🩵☘✦", "oom");
   bindSecretTarget("secret-bam", "Something is blooming here. 🌸🩷", "🌸🩷🌸✦", "bam");
   bindSecretTarget("secret-pair", "Some things are better together. ♡", "🩵♡🩷✦", "pair");
+  bindSecretTarget("secret-oombam-main", "And somehow, it became a story worth keeping.", "🩵☘🌸🩷🐧🦭✦", "oombam");
   bindSecretTarget("secret-oombam", "And somehow, it became a story worth keeping.", "🩵☘🌸🩷🐧🦭✦", "oombam");
 }
 
@@ -361,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
 (function installOombamFallback734(){
   const install = () => {
     const el = document.getElementById("secret-oombam");
+    const mainEl = document.getElementById("secret-oombam-main");
     if (!el || el.dataset.fallback734) return;
     el.dataset.fallback734 = "1";
     el.addEventListener("click", function(event){
@@ -373,6 +375,19 @@ document.addEventListener("DOMContentLoaded", () => {
         "oombam"
       );
     }, true);
+    if (mainEl && !mainEl.dataset.fallback740) {
+      mainEl.dataset.fallback740 = "1";
+      mainEl.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        showNameSecret(
+          "And somehow, it became a story worth keeping.",
+          "🩵☘🌸🩷🐧🦭✦",
+          mainEl,
+          "oombam"
+        );
+      }, true);
+    }
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install);
   else install();
