@@ -1913,3 +1913,24 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   color:#f2a8cd!important;
   -webkit-text-fill-color:#f2a8cd!important;
 }
+
+
+/* Project 1111 v7.5.1 — visible disclaimer OomBam trigger hardening */
+.eyebrow .disclaimer-oombam-secret{
+  display:inline!important;
+  vertical-align:baseline!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  box-shadow:none!important;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+  font:inherit!important;
+  font-weight:inherit!important;
+  letter-spacing:inherit!important;
+  line-height:inherit!important;
+  text-shadow:inherit!important;
+  cursor:default!important;
+}
