@@ -230,15 +230,18 @@ function loadYouTubeAPI() {
 }
 
 
-function showNameSecret(message, symbols, sourceEl) {
-  const toast = document.getElementById("name-secret");
+function showNameSecret(message, symbols, sourceEl, kind = "") {
   const stage = document.getElementById("secret-particles");
-  if (!toast || !stage) return;
+  if (!stage) return;
 
-  toast.classList.remove("is-visible");
+  document.querySelectorAll(".secret-toast-731").forEach((node) => node.remove());
+  const toast = document.createElement("div");
+  toast.className = `secret-toast-731 ${kind}`.trim();
+  toast.setAttribute("role", "status");
+  toast.setAttribute("aria-live", "polite");
   toast.textContent = message;
-  void toast.offsetWidth;
-  toast.classList.add("is-visible");
+  document.body.appendChild(toast);
+  window.setTimeout(() => toast.remove(), 3300);
 
   stage.replaceChildren();
   const rect = sourceEl?.getBoundingClientRect?.();
@@ -259,11 +262,10 @@ function showNameSecret(message, symbols, sourceEl) {
     stage.appendChild(particle);
   });
 
-  window.setTimeout(() => toast.classList.remove("is-visible"), 2800);
   window.setTimeout(() => stage.replaceChildren(), 2100);
 }
 
-function bindSecretTarget(id, message, symbols) {
+function bindSecretTarget(id, message, symbols, kind = "") {
   const el = document.getElementById(id);
   if (!el) return;
   let used = false;
@@ -272,10 +274,14 @@ function bindSecretTarget(id, message, symbols) {
     event.stopPropagation();
     if (used) return;
     used = true;
-    showNameSecret(message, symbols, el);
+    showNameSecret(message, symbols, el, kind);
   };
-  el.addEventListener("click", reveal);
-  el.addEventListener("touchend", reveal, { passive:false });
+  if (window.PointerEvent) {
+    el.addEventListener("pointerup", reveal);
+  } else {
+    el.addEventListener("touchend", reveal, { passive:false });
+    el.addEventListener("click", reveal);
+  }
 }
 
 function setupInteractions() {
@@ -311,24 +317,38 @@ function setupInteractions() {
     event.stopPropagation();
     if (heartBusy) return;
     heartBusy = true;
-    const secret = document.getElementById("heart-secret");
+
     const teaser = document.getElementById("teaser");
-    secret?.classList.remove("is-visible");
     teaser?.classList.remove("heart-found");
-    void secret?.offsetWidth;
-    secret?.classList.add("is-visible");
+    void teaser?.offsetWidth;
     teaser?.classList.add("heart-found");
-    setTimeout(() => secret?.classList.remove("is-visible"), 2600);
+
+    document.querySelectorAll(".secret-toast-731").forEach((node) => node.remove());
+    const toast = document.createElement("div");
+    toast.className = "secret-toast-731 pair";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.textContent = "You found a little something. ♡";
+    document.body.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 3300);
     setTimeout(() => teaser?.classList.remove("heart-found"), 1800);
     setTimeout(() => { heartBusy = false; }, 650);
   };
-  heart?.addEventListener("click", revealHeart);
-  heart?.addEventListener("touchend", revealHeart, { passive:false });
 
-  bindSecretTarget("secret-oom", "You found a little luck. ☘️🩵", "☘🩵☘✦");
-  bindSecretTarget("secret-bam", "Something is blooming here. 🌸🩷", "🌸🩷🌸✦");
-  bindSecretTarget("secret-pair", "Some things are better together. ♡", "🩵♡🩷✦");
-  bindSecretTarget("secret-oombam", "And somehow, it became a story worth keeping.", "🩵☘🌸🩷🐧🦭✦");
+  if (heart) {
+    if (window.PointerEvent) {
+      heart.addEventListener("pointerup", revealHeart);
+    } else {
+      heart.addEventListener("touchend", revealHeart, { passive:false });
+      heart.addEventListener("click", revealHeart);
+    }
+  }
+
+  bindSecretTarget("secret-oom", "You found a little luck. ☘️🩵", "☘🩵☘✦", "oom");
+  bindSecretTarget("secret-bam", "Something is blooming here. 🌸🩷", "🌸🩷🌸✦", "bam");
+  bindSecretTarget("secret-pair", "Some things are better together. ♡", "🩵♡🩷✦", "pair");
+  bindSecretTarget("secret-oombam", "And somehow, it became a story worth keeping.", "🩵☘🌸🩷🐧🦭✦", "oombam");
 }
 
 document.addEventListener("DOMContentLoaded", () => {

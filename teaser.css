@@ -1333,3 +1333,113 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   .name-secret.is-visible,.secret-particle{animation:none!important}
   .name-secret.is-visible{opacity:1;visibility:visible}
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v7.3.1 — EASTER EGG VISIBILITY / MOBILE TAP FIX
+   ===================================================================== */
+
+.top-brand .heart-easter{
+  position:relative!important;
+  color:#ffc1df!important;
+  text-shadow:
+    0 0 7px rgba(255,193,223,.95),
+    0 0 16px rgba(242,168,205,.78),
+    0 0 28px rgba(242,168,205,.42)!important;
+  filter:drop-shadow(0 0 9px rgba(242,168,205,.92))!important;
+}
+.top-brand .heart-easter::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(242,168,205,.30) 0%,rgba(242,168,205,.12) 42%,transparent 72%);
+  transform:scale(.82);
+  animation:heartAura731 7s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes heartAura731{
+  0%,40%,50%,100%{transform:scale(.82);opacity:.62}
+  44%{transform:scale(1.28);opacity:1}
+  47%{transform:scale(.96);opacity:.78}
+}
+
+/* The message is created directly under <body> so no teaser stacking/overflow
+   context can hide it on mobile or desktop. */
+.secret-toast-731{
+  position:fixed!important;
+  z-index:2147483000!important;
+  left:50%!important;
+  top:clamp(86px,14vh,150px)!important;
+  width:max-content!important;
+  max-width:calc(100vw - 32px)!important;
+  transform:translateX(-50%)!important;
+  padding:11px 18px!important;
+  border:1px solid rgba(255,255,255,.20)!important;
+  border-radius:999px!important;
+  background:rgba(4,8,18,.90)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+  backdrop-filter:blur(16px)!important;
+  box-shadow:0 14px 44px rgba(0,0,0,.42),0 0 22px rgba(242,168,205,.08)!important;
+  color:#fff!important;
+  font-family:"DM Sans",Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:500!important;
+  line-height:1.4!important;
+  letter-spacing:.035em!important;
+  text-align:center!important;
+  white-space:normal!important;
+  opacity:0;
+  pointer-events:none!important;
+  animation:secretToast731 3.15s ease both!important;
+}
+.secret-toast-731.oom{box-shadow:0 14px 44px rgba(0,0,0,.42),0 0 28px rgba(154,223,255,.22)!important}
+.secret-toast-731.bam{box-shadow:0 14px 44px rgba(0,0,0,.42),0 0 28px rgba(242,168,205,.24)!important}
+.secret-toast-731.pair{box-shadow:0 14px 44px rgba(0,0,0,.42),-12px 0 30px rgba(154,223,255,.12),12px 0 30px rgba(242,168,205,.14)!important}
+.secret-toast-731.oombam{
+  border-color:rgba(255,255,255,.28)!important;
+  box-shadow:0 14px 48px rgba(0,0,0,.45),-16px 0 34px rgba(154,223,255,.16),16px 0 34px rgba(242,168,205,.18)!important;
+}
+@keyframes secretToast731{
+  0%{opacity:0;transform:translate(-50%,-8px) scale(.96)}
+  12%,78%{opacity:1;transform:translate(-50%,0) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-5px) scale(.98)}
+}
+
+/* Make footer OOMBAM a reliable discovery target without looking like a button. */
+.footer-oombam{
+  display:inline-grid!important;
+  place-items:center!important;
+  min-width:70px!important;
+  min-height:44px!important;
+  margin:-14px -10px!important;
+  padding:14px 10px!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+
+/* Identity targets are similarly forgiving on touch. */
+.identity .identity-secret{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+
+@media (max-width:760px) and (orientation:portrait){
+  .secret-toast-731{
+    top:88px!important;
+    max-width:calc(100vw - 28px)!important;
+    padding:10px 14px!important;
+    font-size:11px!important;
+  }
+  .footer-oombam{
+    min-width:66px!important;
+    min-height:44px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .top-brand .heart-easter::before{animation:none!important;opacity:.8!important;transform:scale(1)!important}
+  .secret-toast-731{animation:secretToast731 3.15s ease both!important}
+}
