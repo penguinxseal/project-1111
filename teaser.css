@@ -1781,3 +1781,135 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   color:#f2a8cd!important;
   -webkit-text-fill-color:#f2a8cd!important;
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v7.5 — CLEAN RESPONSIVE EASTER REVEAL SLOT
+   Structural fix: no fixed toast positioning, no box, no overlap.
+   ===================================================================== */
+
+/* Retire every older fixed toast/message presentation. */
+.easter-message-732,
+.name-secret,
+.secret-toast-731{
+  display:none!important;
+}
+
+/* The reveal now owns a real place in the layout. It is visually empty
+   until an Easter egg is discovered. */
+.easter-reveal-slot{
+  position:relative!important;
+  z-index:40!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:min(720px,82vw)!important;
+  min-height:28px!important;
+  margin:0 auto!important;
+  padding:2px 12px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:rgba(255,255,255,.98)!important;
+  -webkit-text-fill-color:rgba(255,255,255,.98)!important;
+  font-family:"DM Sans",Arial,sans-serif!important;
+  font-size:12px!important;
+  font-weight:600!important;
+  line-height:1.35!important;
+  letter-spacing:.035em!important;
+  text-align:center!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.78),0 0 13px rgba(255,255,255,.14)!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  transform:translateY(4px)!important;
+  transition:opacity .22s ease,transform .22s ease!important;
+  pointer-events:none!important;
+}
+.easter-reveal-slot.show{
+  opacity:1!important;
+  visibility:visible!important;
+  transform:translateY(0)!important;
+}
+.easter-reveal-slot.oom{
+  text-shadow:0 2px 8px rgba(0,0,0,.78),0 0 16px rgba(151,218,255,.52)!important;
+}
+.easter-reveal-slot.bam{
+  text-shadow:0 2px 8px rgba(0,0,0,.78),0 0 16px rgba(242,168,205,.56)!important;
+}
+.easter-reveal-slot.pair,
+.easter-reveal-slot.heart,
+.easter-reveal-slot.oombam{
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.78),
+    -4px 0 14px rgba(151,218,255,.30),
+    4px 0 14px rgba(242,168,205,.40)!important;
+}
+
+/* Desktop + tablet share the same composition.
+   Reserve a slim reveal line immediately before the disclaimer, keeping it
+   away from OOM × BAM and the countdown. */
+@media (min-width:761px){
+  .easter-reveal-slot{
+    min-height:30px!important;
+    margin-bottom:3px!important;
+    font-size:11.5px!important;
+  }
+}
+
+/* Mobile: use the natural negative space beneath the artwork and above the
+   disclaimer. A real in-flow slot means it cannot cover the headline. */
+@media (max-width:760px) and (orientation:portrait){
+  .easter-reveal-slot{
+    width:calc(100vw - 46px)!important;
+    min-height:32px!important;
+    margin-top:0!important;
+    margin-bottom:5px!important;
+    padding:2px 8px!important;
+    font-size:11px!important;
+    line-height:1.3!important;
+  }
+}
+
+/* Mobile landscape follows desktop/tablet but remains compact. */
+@media (max-width:760px) and (orientation:landscape){
+  .easter-reveal-slot{
+    width:68vw!important;
+    min-height:26px!important;
+    margin-bottom:2px!important;
+    font-size:10.5px!important;
+  }
+}
+
+/* OomBam in the disclaimer: invisible interaction treatment, same typography. */
+.disclaimer-oombam-secret{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  display:inline!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+  font:inherit!important;
+  letter-spacing:inherit!important;
+  line-height:inherit!important;
+  text-transform:inherit!important;
+  text-shadow:inherit!important;
+  cursor:default!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+
+/* Preserve the preferred pink OOM × BAM. */
+.identity,
+.identity button,
+.identity .identity-secret,
+.identity .identity-oom,
+.identity .identity-bam,
+.identity .pair-x{
+  color:#f2a8cd!important;
+  -webkit-text-fill-color:#f2a8cd!important;
+}

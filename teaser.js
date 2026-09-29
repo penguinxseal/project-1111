@@ -230,18 +230,22 @@ function loadYouTubeAPI() {
 }
 
 
-let easterMessageTimer732 = null;
+let easterMessageTimer750 = null;
 function showEasterMessage732(message, kind = "") {
-  const box = document.getElementById("easter-message-732");
-  if (!box) return;
-  if (easterMessageTimer732) clearTimeout(easterMessageTimer732);
-  box.className = `easter-message-732 ${kind}`.trim();
-  box.textContent = message;
-  // Force layout before showing; avoids animation/state races on mobile browsers.
-  void box.offsetHeight;
-  box.classList.add("show");
-  easterMessageTimer732 = window.setTimeout(() => {
-    box.classList.remove("show");
+  const slot = document.getElementById("easter-reveal-slot");
+  if (!slot) return;
+
+  if (easterMessageTimer750) clearTimeout(easterMessageTimer750);
+  slot.className = `easter-reveal-slot ${kind}`.trim();
+  slot.textContent = message;
+
+  // Restart reveal animation cleanly on every click/tap.
+  slot.classList.remove("show");
+  void slot.offsetWidth;
+  slot.classList.add("show");
+
+  easterMessageTimer750 = window.setTimeout(() => {
+    slot.classList.remove("show");
   }, 3200);
 }
 
@@ -359,71 +363,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-(function installOombamFallback734(){
-  const install = () => {
-    const el = document.getElementById("secret-oombam");
-    const mainEl = document.getElementById("secret-oombam-main");
-    if (!el || el.dataset.fallback734) return;
-    el.dataset.fallback734 = "1";
-    el.addEventListener("click", function(event){
-      event.preventDefault();
-      event.stopPropagation();
-      showNameSecret(
-        "And somehow, it became a story worth keeping.",
-        "🩵☘🌸🩷🐧🦭✦",
-        el,
-        "oombam"
-      );
-    }, true);
-    if (mainEl && !mainEl.dataset.fallback740) {
-      mainEl.dataset.fallback740 = "1";
-      mainEl.addEventListener("click", function(event){
-        event.preventDefault();
-        event.stopPropagation();
-        showNameSecret(
-          "And somehow, it became a story worth keeping.",
-          "🩵☘🌸🩷🐧🦭✦",
-          mainEl,
-          "oombam"
-        );
-      }, true);
-    }
-  };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install);
-  else install();
-})();
-
-
-(function installHeartFallback735(){
-  const install = () => {
-    const heart = document.getElementById("heart-easter");
-    if (!heart || heart.dataset.fallback735) return;
-    heart.dataset.fallback735 = "1";
-
-    const reveal = (event) => {
-      const now = Date.now();
-      const last = Number(heart.dataset.lastReveal735 || 0);
-      if (now - last < 500) return;
-      heart.dataset.lastReveal735 = String(now);
-      event.preventDefault();
-      event.stopPropagation();
-      showEasterMessage732("Hello My Blossom, Smile My OBOB! 🌸♡", "heart");
-
-      const teaser = document.getElementById("teaser");
-      teaser?.classList.remove("heart-found");
-      void teaser?.offsetWidth;
-      teaser?.classList.add("heart-found");
-      setTimeout(() => teaser?.classList.remove("heart-found"), 1800);
-    };
-
-    heart.addEventListener("pointerup", reveal, true);
-    heart.addEventListener("touchend", reveal, {capture:true, passive:false});
-    heart.addEventListener("click", reveal, true);
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", install, {once:true});
-  } else {
-    install();
-  }
-})();
