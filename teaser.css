@@ -1546,3 +1546,83 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
     0 0 14px rgba(242,168,205,.90),
     0 0 26px rgba(242,168,205,.62)!important;
 }
+
+/* PROJECT 1111 v7.3.4 — repeatable Easter eggs + OOMBAM hit target */
+#secret-oom,#secret-bam,#secret-pair,#secret-oombam,#heart-easter{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+#secret-oombam{
+  position:relative!important;
+  z-index:999!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:84px!important;
+  min-height:44px!important;
+  margin:-14px -12px!important;
+  padding:14px 12px!important;
+  border:0!important;
+  background:transparent!important;
+  color:inherit!important;
+  cursor:default!important;
+}
+.site-footer,.site-footer *{pointer-events:auto!important;}
+.identity,.identity button,.identity .identity-secret,.identity .identity-oom,.identity .identity-bam,.identity .pair-x{
+  color:#f2a8cd!important;
+  -webkit-text-fill-color:#f2a8cd!important;
+}
+
+/* PROJECT 1111 v7.3.5 — mobile Easter-message placement + heart tap reliability */
+@media (max-width:760px) and (orientation:portrait){
+  .easter-message-732{
+    top:356px!important;
+    width:calc(100vw - 56px)!important;
+    max-width:520px!important;
+    padding:9px 14px!important;
+    font-size:11.5px!important;
+    line-height:1.35!important;
+    border-radius:999px!important;
+  }
+}
+
+/* Heart gets a true 48px touch surface without changing masthead layout. */
+#heart-easter{
+  position:relative!important;
+  z-index:1002!important;
+  width:48px!important;
+  height:48px!important;
+  min-width:48px!important;
+  min-height:48px!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+.top-brand{
+  position:relative!important;
+  z-index:1001!important;
+  pointer-events:auto!important;
+}
+
+/* PROJECT 1111 v7.3.6 — transparent Easter-egg message */
+.easter-message-732{
+  background:rgba(7,12,26,.18)!important;
+  border-color:rgba(255,255,255,.12)!important;
+  -webkit-backdrop-filter:blur(5px)!important;
+  backdrop-filter:blur(5px)!important;
+  box-shadow:0 5px 24px rgba(0,0,0,.10)!important;
+}
+.easter-message-732.oom{
+  box-shadow:0 5px 24px rgba(0,0,0,.10),0 0 22px rgba(151,218,255,.10)!important;
+}
+.easter-message-732.bam{
+  box-shadow:0 5px 24px rgba(0,0,0,.10),0 0 22px rgba(242,168,205,.11)!important;
+}
+.easter-message-732.pair,
+.easter-message-732.heart,
+.easter-message-732.oombam{
+  box-shadow:0 5px 24px rgba(0,0,0,.10),-8px 0 22px rgba(151,218,255,.07),8px 0 22px rgba(242,168,205,.08)!important;
+}

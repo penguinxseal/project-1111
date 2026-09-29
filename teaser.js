@@ -275,12 +275,9 @@ function showNameSecret(message, symbols, sourceEl, kind = "") {
 function bindSecretTarget(id, message, symbols, kind = "") {
   const el = document.getElementById(id);
   if (!el) return;
-  let used = false;
   const reveal = (event) => {
     event.preventDefault();
     event.stopPropagation();
-    if (used) return;
-    used = true;
     showNameSecret(message, symbols, el, kind);
   };
   if (window.PointerEvent) {
@@ -359,3 +356,59 @@ document.addEventListener("DOMContentLoaded", () => {
   window.setInterval(updateCountdown, 1000);
   window.setInterval(updateDailyReveal, 1000);
 });
+
+
+(function installOombamFallback734(){
+  const install = () => {
+    const el = document.getElementById("secret-oombam");
+    if (!el || el.dataset.fallback734) return;
+    el.dataset.fallback734 = "1";
+    el.addEventListener("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      showNameSecret(
+        "And somehow, it became a story worth keeping.",
+        "🩵☘🌸🩷🐧🦭✦",
+        el,
+        "oombam"
+      );
+    }, true);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", install);
+  else install();
+})();
+
+
+(function installHeartFallback735(){
+  const install = () => {
+    const heart = document.getElementById("heart-easter");
+    if (!heart || heart.dataset.fallback735) return;
+    heart.dataset.fallback735 = "1";
+
+    const reveal = (event) => {
+      const now = Date.now();
+      const last = Number(heart.dataset.lastReveal735 || 0);
+      if (now - last < 500) return;
+      heart.dataset.lastReveal735 = String(now);
+      event.preventDefault();
+      event.stopPropagation();
+      showEasterMessage732("Hello My Blossom, Smile My OBOB! 🌸♡", "heart");
+
+      const teaser = document.getElementById("teaser");
+      teaser?.classList.remove("heart-found");
+      void teaser?.offsetWidth;
+      teaser?.classList.add("heart-found");
+      setTimeout(() => teaser?.classList.remove("heart-found"), 1800);
+    };
+
+    heart.addEventListener("pointerup", reveal, true);
+    heart.addEventListener("touchend", reveal, {capture:true, passive:false});
+    heart.addEventListener("click", reveal, true);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", install, {once:true});
+  } else {
+    install();
+  }
+})();
