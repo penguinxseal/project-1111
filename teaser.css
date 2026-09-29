@@ -1443,3 +1443,106 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   .top-brand .heart-easter::before{animation:none!important;opacity:.8!important;transform:scale(1)!important}
   .secret-toast-731{animation:secretToast731 3.15s ease both!important}
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v7.3.2 — GUARANTEED EASTER TEXT + PINK OOM × BAM
+   ===================================================================== */
+
+/* Restore the pink identity treatment the user preferred. */
+.identity,
+.identity .identity-secret,
+.identity .pair-x{
+  color:#f2a8cd!important;
+}
+.identity .identity-oom,
+.identity .identity-bam{
+  color:#f2a8cd!important;
+  text-shadow:0 2px 14px rgba(242,168,205,.20)!important;
+}
+
+/* Dedicated message layer: not nested in the teaser, cards, or particle stage. */
+.easter-message-732{
+  position:fixed!important;
+  z-index:2147483647!important;
+  left:50%!important;
+  top:clamp(90px,15vh,160px)!important;
+  width:auto!important;
+  min-width:220px!important;
+  max-width:min(560px,calc(100vw - 28px))!important;
+  transform:translate(-50%,-8px)!important;
+  box-sizing:border-box!important;
+  padding:12px 20px!important;
+  border:1px solid rgba(255,255,255,.28)!important;
+  border-radius:999px!important;
+  background:#0b1020!important;
+  background:rgba(7,12,26,.96)!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  font-family:Arial,"DM Sans",sans-serif!important;
+  font-size:13px!important;
+  font-weight:600!important;
+  line-height:1.45!important;
+  letter-spacing:.01em!important;
+  text-align:center!important;
+  text-transform:none!important;
+  white-space:normal!important;
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  box-shadow:0 14px 48px rgba(0,0,0,.52),0 0 28px rgba(242,168,205,.18)!important;
+  transition:opacity .22s ease,transform .22s ease!important;
+}
+.easter-message-732.show{
+  visibility:visible!important;
+  opacity:1!important;
+  transform:translate(-50%,0)!important;
+}
+.easter-message-732.oom{
+  box-shadow:0 14px 48px rgba(0,0,0,.52),0 0 32px rgba(151,218,255,.32)!important;
+}
+.easter-message-732.bam{
+  box-shadow:0 14px 48px rgba(0,0,0,.52),0 0 32px rgba(242,168,205,.34)!important;
+}
+.easter-message-732.pair,
+.easter-message-732.heart,
+.easter-message-732.oombam{
+  box-shadow:0 14px 48px rgba(0,0,0,.52),-12px 0 30px rgba(151,218,255,.16),12px 0 30px rgba(242,168,205,.22)!important;
+}
+
+@media (max-width:760px){
+  .easter-message-732{
+    top:82px!important;
+    min-width:0!important;
+    width:calc(100vw - 32px)!important;
+    max-width:420px!important;
+    padding:11px 14px!important;
+    font-size:12px!important;
+  }
+}
+
+
+/* PROJECT 1111 v7.3.3 — final identity + heart message refinement */
+.identity,
+.identity button,
+.identity .identity-secret,
+.identity .identity-oom,
+.identity .identity-bam,
+.identity .pair-x{
+  color:#f2a8cd!important;
+  -webkit-text-fill-color:#f2a8cd!important;
+}
+.identity .identity-oom,
+.identity .identity-bam{
+  text-shadow:0 2px 15px rgba(242,168,205,.28)!important;
+}
+
+/* Make the heart unmistakably luminous while preserving the elegant masthead. */
+#heart-easter{
+  color:#ffc1df!important;
+  -webkit-text-fill-color:#ffc1df!important;
+  text-shadow:
+    0 0 6px rgba(255,193,223,1),
+    0 0 14px rgba(242,168,205,.90),
+    0 0 26px rgba(242,168,205,.62)!important;
+}

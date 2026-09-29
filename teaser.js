@@ -230,18 +230,25 @@ function loadYouTubeAPI() {
 }
 
 
+let easterMessageTimer732 = null;
+function showEasterMessage732(message, kind = "") {
+  const box = document.getElementById("easter-message-732");
+  if (!box) return;
+  if (easterMessageTimer732) clearTimeout(easterMessageTimer732);
+  box.className = `easter-message-732 ${kind}`.trim();
+  box.textContent = message;
+  // Force layout before showing; avoids animation/state races on mobile browsers.
+  void box.offsetHeight;
+  box.classList.add("show");
+  easterMessageTimer732 = window.setTimeout(() => {
+    box.classList.remove("show");
+  }, 3200);
+}
+
 function showNameSecret(message, symbols, sourceEl, kind = "") {
+  showEasterMessage732(message, kind);
   const stage = document.getElementById("secret-particles");
   if (!stage) return;
-
-  document.querySelectorAll(".secret-toast-731").forEach((node) => node.remove());
-  const toast = document.createElement("div");
-  toast.className = `secret-toast-731 ${kind}`.trim();
-  toast.setAttribute("role", "status");
-  toast.setAttribute("aria-live", "polite");
-  toast.textContent = message;
-  document.body.appendChild(toast);
-  window.setTimeout(() => toast.remove(), 3300);
 
   stage.replaceChildren();
   const rect = sourceEl?.getBoundingClientRect?.();
@@ -317,21 +324,13 @@ function setupInteractions() {
     event.stopPropagation();
     if (heartBusy) return;
     heartBusy = true;
+    showEasterMessage732("Hello My Blossom, Smile My OBOB! 🌸♡", "heart");
 
     const teaser = document.getElementById("teaser");
     teaser?.classList.remove("heart-found");
     void teaser?.offsetWidth;
     teaser?.classList.add("heart-found");
 
-    document.querySelectorAll(".secret-toast-731").forEach((node) => node.remove());
-    const toast = document.createElement("div");
-    toast.className = "secret-toast-731 pair";
-    toast.setAttribute("role", "status");
-    toast.setAttribute("aria-live", "polite");
-    toast.textContent = "You found a little something. ♡";
-    document.body.appendChild(toast);
-
-    setTimeout(() => toast.remove(), 3300);
     setTimeout(() => teaser?.classList.remove("heart-found"), 1800);
     setTimeout(() => { heartBusy = false; }, 650);
   };
