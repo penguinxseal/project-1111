@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&family=Italianno&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="teaser.css?v=20260929-1111-7-2-1" />
+  <link rel="stylesheet" href="teaser.css?v=20260929-1111-7-3" />
   <link rel="icon" href="/project-1111/assets/favicon/favicon.ico?v=72" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/project-1111/assets/favicon/favicon-32x32.png?v=72" />
   <link rel="icon" type="image/png" sizes="16x16" href="/project-1111/assets/favicon/favicon-16x16.png?v=72" />
@@ -58,8 +58,8 @@
         <span class="headline-main sequence sequence-headline">Something beautiful</span>
         <span class="headline-bloom sequence sequence-bloom">is blooming.</span>
       </h1>
-      <p class="identity sequence sequence-identity">
-        <span>OOM</span><span class="pair-x">×</span><span>BAM</span>
+      <p class="identity sequence sequence-identity" aria-label="Oom and Bam">
+        <button class="identity-secret identity-oom" id="secret-oom" type="button" aria-label="Oom">OOM</button><button class="identity-secret pair-x" id="secret-pair" type="button" aria-label="Oom and Bam together">×</button><button class="identity-secret identity-bam" id="secret-bam" type="button" aria-label="Bam">BAM</button>
       </p>
       <div class="launch-block sequence sequence-coming" aria-label="Launch countdown">
         <div class="countdown" id="countdown" role="timer" aria-live="off">
@@ -111,13 +111,15 @@
     </aside>
 
     <footer class="footer sequence sequence-footer">
-      <span>DESIGNED WITH LOVE FOR OOMBAM</span><span class="thai-year" lang="th">๒๕๖๙</span>
+      <span>DESIGNED WITH LOVE FOR <button class="footer-oombam" id="secret-oombam" type="button" aria-label="OomBam">OOMBAM</button></span><span class="thai-year" lang="th">๒๕๖๙</span>
     </footer>
 
     <div class="heart-secret" id="heart-secret" role="status" aria-live="polite">You found a little something. ♡</div>
+    <div class="name-secret" id="name-secret" role="status" aria-live="polite"></div>
+    <div class="secret-particles" id="secret-particles" aria-hidden="true"></div>
     <div class="reveal-flash" id="reveal-flash" aria-hidden="true"><span>✦</span><strong>SOMETHING JUST BLOOMED</strong><span>🌸</span></div>
     <div class="vignette" aria-hidden="true"></div>
   </main>
-  <script src="teaser.js?v=20260929-1111-7-2" defer></script>
+  <script src="teaser.js?v=20260929-1111-7-3" defer></script>
 </body>
 </html>

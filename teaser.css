@@ -1139,3 +1139,197 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
     font-size:17px!important;
   }
 }
+
+
+/* =====================================================================
+   PROJECT 1111 v7.3 — MASTHEAD + DISCOVERY EASTER EGGS
+   ===================================================================== */
+
+/* PENGUIN ♥ SEAL is now treated as the main masthead. */
+.top-brand{
+  gap:clamp(18px,1.8vw,30px)!important;
+  font-family:"DM Sans",Arial,sans-serif!important;
+  font-size:clamp(12px,1.02vw,17px)!important;
+  font-weight:600!important;
+  letter-spacing:.38em!important;
+}
+.top-brand .heart-easter{
+  position:relative;
+  z-index:31;
+  display:inline-grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  min-width:44px;
+  margin:-12px -9px!important;
+  padding:0!important;
+  color:#f2a8cd!important;
+  font-family:Georgia,serif!important;
+  font-size:clamp(22px,1.55vw,29px)!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+  filter:drop-shadow(0 0 7px rgba(242,168,205,.55));
+  pointer-events:auto!important;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  animation:mastheadHeartbeat 7s ease-in-out infinite;
+}
+@keyframes mastheadHeartbeat{
+  0%,42%,48%,100%{transform:scale(1);filter:drop-shadow(0 0 7px rgba(242,168,205,.48))}
+  44%{transform:scale(1.13);filter:drop-shadow(0 0 12px rgba(242,168,205,.82))}
+  46%{transform:scale(1.04);filter:drop-shadow(0 0 9px rgba(242,168,205,.64))}
+}
+
+/* OOM / × / BAM remain visually editorial; the button chrome is invisible. */
+.identity .identity-secret,
+.footer-oombam{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  letter-spacing:inherit;
+  line-height:inherit;
+  text-shadow:inherit;
+  padding:0;
+  cursor:default;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.identity .identity-secret{
+  position:relative;
+  z-index:25;
+  min-height:44px;
+  min-width:44px;
+  display:inline-grid;
+  place-items:center;
+  margin:-12px -8px;
+  padding:12px 8px;
+}
+.identity .pair-x{
+  color:#f2a8cd!important;
+  font-family:"DM Sans",Arial,sans-serif!important;
+  font-size:.60em!important;
+  font-weight:500!important;
+  letter-spacing:0!important;
+}
+
+/* Shared secret toast for OOM, BAM, × and OOMBAM. */
+.name-secret{
+  position:fixed;
+  z-index:90;
+  left:50%;
+  top:15%;
+  max-width:min(88vw,420px);
+  transform:translate(-50%,-8px);
+  padding:10px 16px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(3,7,17,.72);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  color:rgba(255,255,255,.96);
+  font-family:"DM Sans",Arial,sans-serif;
+  font-size:10px;
+  line-height:1.35;
+  letter-spacing:.07em;
+  text-align:center;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  box-shadow:0 12px 36px rgba(0,0,0,.24);
+}
+.name-secret.is-visible{
+  visibility:visible;
+  animation:nameSecretToast 2.8s ease both;
+}
+@keyframes nameSecretToast{
+  0%{opacity:0;transform:translate(-50%,-6px)}
+  14%,78%{opacity:1;transform:translate(-50%,0)}
+  100%{opacity:0;transform:translate(-50%,-4px)}
+}
+
+.secret-particles{
+  position:fixed;
+  inset:0;
+  z-index:89;
+  pointer-events:none;
+  overflow:hidden;
+}
+.secret-particle{
+  position:fixed;
+  left:var(--x);
+  top:var(--y);
+  font-size:var(--size);
+  line-height:1;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.55) rotate(var(--rot));
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.18));
+  animation:secretFloat 1.9s ease-out forwards;
+}
+@keyframes secretFloat{
+  0%{opacity:0;transform:translate(-50%,-35%) scale(.55) rotate(var(--rot))}
+  18%{opacity:.95}
+  100%{opacity:0;transform:translate(calc(-50% + var(--drift)),calc(-50% - 82px)) scale(1.08) rotate(calc(var(--rot) + 24deg))}
+}
+
+/* The Thai-year signature should be readable, not microscopic. */
+.thai-year{
+  font-size:14px!important;
+  font-weight:600!important;
+  letter-spacing:.18em!important;
+  color:rgba(255,255,255,.90)!important;
+}
+
+/* Footer OOMBAM stays visually identical until someone discovers it. */
+.footer-oombam{
+  position:relative;
+  z-index:25;
+  min-height:34px;
+  margin:-9px -5px;
+  padding:9px 5px;
+}
+
+@media (max-width:760px) and (orientation:portrait){
+  .top-brand{
+    top:max(22px,env(safe-area-inset-top))!important;
+    gap:15px!important;
+    font-size:13px!important;
+    letter-spacing:.29em!important;
+  }
+  .top-brand .heart-easter{
+    width:46px;
+    height:46px;
+    min-width:46px;
+    margin:-13px -10px!important;
+    font-size:26px!important;
+  }
+  .thai-year{
+    font-size:13px!important;
+    letter-spacing:.16em!important;
+  }
+  .name-secret{
+    top:92px;
+    font-size:9px;
+    max-width:calc(100vw - 36px);
+    padding:9px 13px;
+  }
+}
+
+@media (max-width:390px) and (orientation:portrait){
+  .top-brand{
+    gap:11px!important;
+    font-size:12px!important;
+    letter-spacing:.24em!important;
+  }
+  .top-brand .heart-easter{
+    font-size:25px!important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .top-brand .heart-easter{animation:none!important}
+  .name-secret.is-visible,.secret-particle{animation:none!important}
+  .name-secret.is-visible{opacity:1;visibility:visible}
+}

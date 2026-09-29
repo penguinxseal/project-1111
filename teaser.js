@@ -229,6 +229,55 @@ function loadYouTubeAPI() {
   document.head.appendChild(script);
 }
 
+
+function showNameSecret(message, symbols, sourceEl) {
+  const toast = document.getElementById("name-secret");
+  const stage = document.getElementById("secret-particles");
+  if (!toast || !stage) return;
+
+  toast.classList.remove("is-visible");
+  toast.textContent = message;
+  void toast.offsetWidth;
+  toast.classList.add("is-visible");
+
+  stage.replaceChildren();
+  const rect = sourceEl?.getBoundingClientRect?.();
+  const cx = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+  const cy = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+  const glyphs = Array.from(symbols);
+
+  glyphs.forEach((glyph, i) => {
+    const particle = document.createElement("span");
+    particle.className = "secret-particle";
+    particle.textContent = glyph;
+    const spread = (i - (glyphs.length - 1) / 2) * 19;
+    particle.style.setProperty("--x", `${cx + spread}px`);
+    particle.style.setProperty("--y", `${cy + (i % 2 ? 6 : -4)}px`);
+    particle.style.setProperty("--drift", `${spread * .9}px`);
+    particle.style.setProperty("--rot", `${(i % 2 ? 1 : -1) * (8 + i * 3)}deg`);
+    particle.style.setProperty("--size", `${16 + (i % 3) * 3}px`);
+    stage.appendChild(particle);
+  });
+
+  window.setTimeout(() => toast.classList.remove("is-visible"), 2800);
+  window.setTimeout(() => stage.replaceChildren(), 2100);
+}
+
+function bindSecretTarget(id, message, symbols) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let used = false;
+  const reveal = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    if (used) return;
+    used = true;
+    showNameSecret(message, symbols, el);
+  };
+  el.addEventListener("click", reveal);
+  el.addEventListener("touchend", reveal, { passive:false });
+}
+
 function setupInteractions() {
   document.getElementById("music-toggle")?.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -255,8 +304,13 @@ function setupInteractions() {
     button.textContent = box.hidden ? "← YESTERDAY" : "CLOSE MEMORY ×";
   });
 
-  document.getElementById("heart-easter")?.addEventListener("click", (event) => {
+  const heart = document.getElementById("heart-easter");
+  let heartBusy = false;
+  const revealHeart = (event) => {
+    event.preventDefault();
     event.stopPropagation();
+    if (heartBusy) return;
+    heartBusy = true;
     const secret = document.getElementById("heart-secret");
     const teaser = document.getElementById("teaser");
     secret?.classList.remove("is-visible");
@@ -266,7 +320,15 @@ function setupInteractions() {
     teaser?.classList.add("heart-found");
     setTimeout(() => secret?.classList.remove("is-visible"), 2600);
     setTimeout(() => teaser?.classList.remove("heart-found"), 1800);
-  });
+    setTimeout(() => { heartBusy = false; }, 650);
+  };
+  heart?.addEventListener("click", revealHeart);
+  heart?.addEventListener("touchend", revealHeart, { passive:false });
+
+  bindSecretTarget("secret-oom", "You found a little luck. ☘️🩵", "☘🩵☘✦");
+  bindSecretTarget("secret-bam", "Something is blooming here. 🌸🩷", "🌸🩷🌸✦");
+  bindSecretTarget("secret-pair", "Some things are better together. ♡", "🩵♡🩷✦");
+  bindSecretTarget("secret-oombam", "And somehow, it became a story worth keeping.", "🩵☘🌸🩷🐧🦭✦");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
