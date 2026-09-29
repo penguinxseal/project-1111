@@ -1073,3 +1073,69 @@ body{overflow:hidden;color:var(--white);font-family:var(--sans);-webkit-font-smo
   .launch-block{width:94vw!important}
   .daily-reveal,.soundtrack,.footer{width:calc(100% - 24px)!important}
 }
+
+/* =====================================================================
+   PROJECT 1111 v7.2.1 — MOBILE TYPOGRAPHY + SPACING MICRO-PASS
+   Desktop remains untouched.
+   ===================================================================== */
+@media (max-width:760px) and (orientation:portrait){
+
+  /* Reduce the oversized dark gap below the hero artwork. */
+  .hero-copy{
+    padding-top:275px!important;
+  }
+
+  /* Make the independent-fansite disclaimer comfortably readable. */
+  .eyebrow{
+    max-width:calc(100vw - 34px)!important;
+    padding:7px 12px 6px!important;
+    font-size:9px!important;
+    line-height:1.35!important;
+    letter-spacing:.10em!important;
+    white-space:normal!important;
+  }
+
+  /* Give OOM × BAM a stronger editorial identity. */
+  .identity{
+    margin-top:25px!important;
+    gap:16px!important;
+    font-family:"Playfair Display",Georgia,serif!important;
+    font-size:18px!important;
+    font-weight:500!important;
+    line-height:1!important;
+    letter-spacing:.12em!important;
+    color:rgba(255,255,255,.97)!important;
+    text-shadow:0 3px 16px rgba(0,0,0,.34)!important;
+  }
+
+  .identity span{
+    margin:0!important;
+    font-family:"DM Sans",Arial,sans-serif!important;
+    font-size:10px!important;
+    font-weight:500!important;
+    letter-spacing:0!important;
+    color:#f2a8cd!important;
+    opacity:.94!important;
+  }
+
+  /* Preserve breathing room before the master countdown. */
+  .launch-block{
+    margin-top:18px!important;
+  }
+}
+
+@media (max-width:390px) and (orientation:portrait){
+  .hero-copy{
+    padding-top:255px!important;
+  }
+
+  .eyebrow{
+    font-size:8.5px!important;
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+
+  .identity{
+    font-size:17px!important;
+  }
+}
