@@ -113,7 +113,7 @@
     badge.className = "bam-birthday-badge";
     badge.setAttribute("aria-label", "Open the Happy Bam Day surprise");
     badge.innerHTML = `<span aria-hidden="true">🌸</span><small>10.08</small>`;
-    root.appendChild(badge);
+    document.body.appendChild(badge); // Escape the teaser stacking context so the button stays above the soundtrack.
 
     const card = document.createElement("div");
     card.className = "bam-birthday-card";
@@ -134,7 +134,7 @@
         <small class="bam-bloom-count" aria-live="polite">0 blooms sent 🌸</small>
         <div class="bam-eight-secret" aria-live="polite"><strong>8 taps on 10.08?</strong><br>You understood the assignment. 😂🦭🌸<br><b>HAPPY BAM DAY ♡</b></div>
       </div>`;
-    root.appendChild(card);
+    document.body.appendChild(card); // Keep the birthday dialog above the page and the floating button.
 
     let blooms = 0;
     try { blooms = Number(localStorage.getItem(STORAGE + "bam-blooms") || 0); } catch (_) {}
