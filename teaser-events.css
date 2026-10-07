@@ -33,3 +33,22 @@
 .archive-glitch{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:#050510e8;color:#9ffff2;font:18px monospace}.archive-glitch.show{display:flex}.archive-glitch>div{display:grid;gap:12px;padding:25px}.archive-glitch strong{display:none;color:#f8c2e6}.archive-glitch.answer strong{display:block}
 @media(max-width:480px){.bam-birthday-card{padding:12px}.bam-birthday-card-inner{padding:32px 19px 22px;max-height:calc(100dvh - 24px)}.bam-birthday-badge{right:12px;bottom:16px}}
 @media(prefers-reduced-motion:reduce){.bam-birthday-blooms span,.pakulo-sky span{animation:none}}
+
+/* v7.9: keep the birthday trigger above the soundtrack and inside viewport. */
+.bam-birthday-badge{
+  position:fixed !important;
+  top:auto !important;
+  left:auto !important;
+  right:max(16px, env(safe-area-inset-right)) !important;
+  bottom:max(24px, env(safe-area-inset-bottom)) !important;
+  z-index:10020 !important;
+  transform:none !important;
+  visibility:visible;
+  isolation:isolate;
+}
+@media (max-width:480px) and (orientation:portrait){
+  .bam-birthday-badge{right:max(12px, env(safe-area-inset-right)) !important;bottom:max(16px, env(safe-area-inset-bottom)) !important;}
+}
+@media (orientation:landscape) and (max-height:550px){
+  .bam-birthday-badge{right:max(12px, env(safe-area-inset-right)) !important;bottom:max(12px, env(safe-area-inset-bottom)) !important;padding:8px 12px;}
+}
