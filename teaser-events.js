@@ -191,7 +191,8 @@
       s.style.setProperty("--r", `${-35 + ((i * 19) % 70)}deg`);
       box.appendChild(s);
     }
-    root.appendChild(box);
+    // Attach to body, outside the teaser stacking context and above the modal.
+    document.body.appendChild(box);
     setTimeout(() => box.remove(), 5600);
   }
 
