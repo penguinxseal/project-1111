@@ -1,0 +1,32 @@
+/* Mobile/tablet birthday bloom visibility patch. Loaded AFTER teaser-events.css. */
+@media (max-width: 1024px), (pointer: coarse) {
+  body > .bam-birthday-blooms {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+    z-index: 2147483647 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  body > .bam-birthday-blooms > span {
+    position: absolute !important;
+    left: var(--x) !important;
+    bottom: 8% !important;
+    display: block !important;
+    font-size: clamp(24px, 5vw, 36px) !important;
+    line-height: 1.2 !important;
+    opacity: 1;
+    animation: bamMobilePetalFloat 3.7s var(--d, 0s) ease-out both !important;
+    will-change: transform, opacity;
+  }
+  @keyframes bamMobilePetalFloat {
+    0% { transform: translate3d(0, 0, 0) scale(.7) rotate(0); opacity: 0; }
+    12% { opacity: 1; }
+    75% { opacity: 1; }
+    100% { transform: translate3d(-25px, -75dvh, 0) scale(1.1) rotate(var(--r, 25deg)); opacity: 0; }
+  }
+}
